@@ -1,0 +1,47 @@
+===================
+Function Definition
+===================
+function FunctionA()
+{
+  Print( 'Hello' )
+}
+
+function FunctionB( .Arg .Arg2 )
+{
+  If( .Arg1 == .Arg2 )
+  {
+    Print( 'Equal' )
+  }
+}
+-------------------
+(source_file
+ (function_definition
+  name: (user_function (identifier))
+  arguments: (arguments)
+  body: (array
+   (print
+	message: (string (single_quoted))
+   )
+  )
+ )
+ (function_definition
+  name: (user_function (identifier))
+  arguments: (arguments
+   (usage (variable (identifier)))
+   (usage (variable (identifier)))
+  )
+  body: (array
+   (if
+	condition: (comparison
+     lhs: (usage (variable (identifier)))
+     rhs: (usage (variable (identifier)))
+    )
+    body: (array
+     (print
+	  message: (string (single_quoted))
+	 )
+    )
+   )
+  )
+ )
+)

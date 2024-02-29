@@ -1,0 +1,10 @@
+=======
+Comment
+=======
+// c-style comment
+; asm-style comment
+-------
+(source_file
+ (comment)
+ (comment)
+)

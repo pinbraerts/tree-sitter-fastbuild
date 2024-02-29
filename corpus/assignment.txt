@@ -1,0 +1,33 @@
+==========
+Assignment
+==========
+.MyString = "$StringA$ FASTBuild user!"
+.MyBool = true
+.MyInt = 7
+.MyArray = { "aaa", "bbb", "ccc" }
+----------
+(source_file
+ (assignment
+  lhs: (usage (variable (identifier)))
+  rhs: (string
+   (interpolation (identifier))
+   (double_quoted)
+  )
+ )
+ (assignment
+  lhs: (usage (variable (identifier)))
+  rhs: (boolean)
+ )
+ (assignment
+  lhs: (usage (variable (identifier)))
+  rhs: (decimal)
+ )
+ (assignment
+  lhs: (usage (variable (identifier)))
+  rhs: (array
+   (string (double_quoted))
+   (string (double_quoted))
+   (string (double_quoted))
+  )
+ )
+)

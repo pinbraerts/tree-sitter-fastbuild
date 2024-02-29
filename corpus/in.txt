@@ -1,0 +1,36 @@
+==
+In
+==
+If( .String in .ArrayOfStrings )
+{
+}
+If( "StringLiteral" not in .ArrayOfStrings )
+{
+}
+If( .ArrayOfStrings1 not in .ArrayOfStrings2 )
+{
+}
+--
+(source_file
+ (if
+  condition: (in
+   lhs: (usage (variable (identifier)))
+   rhs: (usage (variable (identifier)))
+  )
+  body: (array)
+ )
+ (if
+  condition: (not_in
+   lhs: (string (double_quoted))
+   rhs: (usage (variable (identifier)))
+  )
+  body: (array)
+ )
+ (if
+  condition: (not_in
+   lhs: (usage (variable (identifier)))
+   rhs: (usage (variable (identifier)))
+  )
+  body: (array)
+ )
+)

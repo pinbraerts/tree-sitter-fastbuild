@@ -1,0 +1,26 @@
+========
+For Each
+========
+ForEach( .IncPath in .IncPaths )
+{
+  ^CompilerOptions   + ' /I"$IncPath$"'
+}
+--------
+(source_file
+ (for_each
+  iterator: (in
+   lhs: (usage (variable (identifier)))
+   rhs: (usage (variable (identifier)))
+  )
+  body: (array
+   (concatenation
+	lhs: (propagation (variable (identifier)))
+	rhs: (string
+     (single_quoted)
+	 (interpolation (identifier))
+	 (single_quoted)
+	)
+   )
+  )
+ )
+)

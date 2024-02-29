@@ -1,0 +1,10 @@
+======
+Define
+======
+#define A
+#define MACRO
+------
+(source_file
+ (define (user_macros (identifier)))
+ (define (user_macros (identifier)))
+)

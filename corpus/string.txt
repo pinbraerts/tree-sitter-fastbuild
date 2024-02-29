@@ -1,0 +1,46 @@
+======
+String
+======
+"This contains ' inside the string"
+'This contains " inside the string'
+"This string has ^" in it"
+'This string has ^' in it'
+"Escape the ^$ and ^" symbols, or escape the ^^ itself."
+"$StringA$ FASTBuild user!"
+'Multiple $interpolation$ string $with$ %12'
+------
+(source_file
+ (string (double_quoted))
+ (string (single_quoted))
+ (string
+  (double_quoted)
+  (escape_sequence)
+  (double_quoted)
+ )
+ (string
+  (single_quoted)
+  (escape_sequence)
+  (single_quoted)
+ )
+ (string
+  (double_quoted)
+  (escape_sequence)
+  (double_quoted)
+  (escape_sequence)
+  (double_quoted)
+  (escape_sequence)
+  (double_quoted)
+ )
+ (string
+  (interpolation (identifier))
+  (double_quoted)
+ )
+ (string
+  (single_quoted)
+  (interpolation (identifier))
+  (single_quoted)
+  (interpolation (identifier))
+  (single_quoted)
+  (placeholder number: (decimal))
+ )
+)

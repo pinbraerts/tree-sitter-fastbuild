@@ -1,0 +1,8 @@
+=====
+Undef
+=====
+#undef USE_CLANG_COMPILER
+-----
+(source_file
+ (undef (user_macros (identifier)))
+)

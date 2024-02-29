@@ -1,0 +1,8 @@
+=======
+Include
+=======
+  #    include "/some/file/full/path.txt"
+-------
+(source_file
+ (include (filename))
+)

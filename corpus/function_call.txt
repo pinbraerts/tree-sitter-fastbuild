@@ -1,0 +1,37 @@
+=============
+Function Call
+=============
+FunctionA()
+FunctionB   ( 'ALiteralString', .APreviouslyDeclaredString )
+Library ( "mylib" .Variable )
+{
+	.LibrarianOutput = "out\libs\mylib.lib"
+}
+-------------
+(source_file
+ (function_call
+  name: (user_function (identifier))
+  arguments: (arguments)
+ )
+ (function_call
+  name: (user_function (identifier))
+  arguments: (arguments
+   (string (single_quoted))
+   (usage (variable (identifier)))
+  )
+ )
+ (function_call
+  name: (builtin_function)
+  arguments: (arguments
+   (string (double_quoted))
+   (usage (variable (identifier)))
+  )
+  body: (array
+   (assignment
+	lhs: (usage (variable (identifier)))
+	rhs: (string (double_quoted))
+   )
+  )
+ )
+)
+

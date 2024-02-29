@@ -1,0 +1,19 @@
+=============
+Concatenation
+=============
+.MyString = " there"
+          + " FASTBuild user"
+		  - "subtract"
+-------------
+(source_file
+ (subtraction
+  lhs: (concatenation
+   lhs: (assignment
+    lhs: (usage (variable (identifier)))
+    rhs: (string (double_quoted))
+   )
+   rhs: (string (double_quoted))
+  )
+  rhs: (string (double_quoted))
+ )
+)

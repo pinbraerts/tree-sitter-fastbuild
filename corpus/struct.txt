@@ -1,0 +1,59 @@
+======
+Struct
+======
+
+.MyStruct =
+[
+  .MyString = "string"
+  .MyInt    = 7
+]
+
+.StructA = [ .StringA = 'a' ]
+
+.StructA =
+[
+  .ArrayOfStrings     = { 'String1', 'String2' }
+  .String             = 'String'
+]
+
+------
+(source_file
+ (assignment
+  lhs: (usage (variable (identifier)))
+  rhs: (struct
+   (assignment
+    lhs: (usage (variable (identifier)))
+    rhs: (string (double_quoted))
+   )
+   (assignment
+    lhs: (usage (variable (identifier)))
+    rhs: (decimal)
+   )
+  )
+ )
+ (assignment
+  lhs: (usage (variable (identifier)))
+  rhs: (struct
+   (assignment
+    lhs: (usage (variable (identifier)))
+    rhs: (string (single_quoted))
+   )
+  )
+ )
+ (assignment
+  lhs: (usage (variable (identifier)))
+  rhs: (struct
+   (assignment
+    lhs: (usage (variable (identifier)))
+    rhs: (array 
+     (string (single_quoted))
+     (string (single_quoted))
+    )
+   )
+   (assignment
+    lhs: (usage (variable (identifier)))
+    rhs: (string (single_quoted))
+   )
+  )
+ )
+)
