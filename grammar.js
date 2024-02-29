@@ -159,39 +159,31 @@ module.exports = grammar({
 		variable: $ => choice($.builtin_variable, $.identifier),
 		usage: $ => seq('.', choice($.variable, $.string)),
 		propagation: $ => seq('^', choice($.variable, $.string)),
+		reference: $ => choice($.usage, $.propagation),
 		statement: $ => choice(
-			$.propagation,
-			$.expression,
-		),
-		expression: $ => choice(
-			$.operator,
+			$.compound,
 			$.array,
-			$.struct,
 			$.function_call,
 			$.function_definition,
 			$.control_flow,
+		),
+		expression: $ => choice(
+			$.array,
+			$.struct,
 			$.primary,
 		),
+		compound: $ => seq(
+			$.reference,
+			choice($.assignment, $.operator),
+			repeat($.operator),
+		),
 		operator: $ => choice(
-			$.assignment,
 			$.concatenation,
 			$.subtraction,
 		),
-		assignment: $ => prec.right(precedence.assign, seq(
-			field('lhs', $.statement),
-			'=',
-			field('rhs', $.expression),
-		)),
-		concatenation: $ => prec.left(precedence.concat, seq(
-			field('lhs', $.statement),
-			'+',
-			field('rhs', $.expression),
-		)),
-		subtraction: $ => prec.left(precedence.subtract, seq(
-			field('lhs', $.statement),
-			'-',
-			field('rhs', $.expression),
-		)),
+		assignment:    $ => seq('=', field('assign', $.expression)),
+		concatenation: $ => seq('+', field('concat', $.expression)),
+		subtraction:   $ => seq('-', field('subtract', $.expression)),
 		boolean: _ => choice(
 			'true', 'false'
 		),
