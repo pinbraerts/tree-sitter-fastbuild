@@ -1,0 +1,7 @@
+Library( "mylib" )
+{
+  ; NOTE: some option omitted for brevity
+  .CompilerInputPath = 'Code\'               ; will build all cpp files in this directory
+  .CompilerOutputPath= 'Tmp\'
+  .CompilerOptions   = '%1 /Fo%2 /nologo /c' ; substitutions detailed below
+}

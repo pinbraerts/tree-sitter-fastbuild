@@ -1,0 +1,3 @@
+.Config   = 'Debug'
+.Platform = 'X64'
+.Options  = ."CompilerOptions_$Config$_$Platform$" // expands to .CompilerOptions_Debug_X64

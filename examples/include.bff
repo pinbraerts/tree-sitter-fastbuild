@@ -1,0 +1,8 @@
+#include "platforms/x86.bff"
+#include "platforms/x64.bff"
+
+#include "libs/core.bff"
+#include "libs/graphics.bff"
+#include "libs/sound.bff"
+
+#include "game.bff"

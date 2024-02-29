@@ -1,0 +1,11 @@
+; Example A
+Library( "mylib" )
+{
+  .Compiler = "cl.exe"
+}
+
+; Example B
+.Compiler = "cl.exe"
+Library( "mylib" )
+{
+}

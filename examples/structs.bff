@@ -1,0 +1,51 @@
+.MyStruct =
+[
+  .MyString = "string"
+  .MyInt    = 7
+]
+
+Using( .MyStruct )
+
+.StructA = [ .StringA = 'a' ]
+.StructB =
+[
+  Using( .StructA ) // "inherit" - StructB now has a StringA property
+  .StringB = 'b'    // "extend" - An additional property
+]
+
+.StructA =
+[
+  .ArrayOfStrings     = { 'String1', 'String2' }
+  .String             = 'String'
+]
+.StructB =
+[
+  .ArrayOfStrings     = { 'String3' }
+  .String             = '!'
+]
+.StructC = .StructA
+         + .StructB
+// StructC now contains .ArrayOfStrings = { 'String1', 'String2', 'String3' } and .String = 'String!'
+
+.ConfigX86 =
+[ 
+  .Compiler   = "compilers/x86/cl.exe"
+  .ConfigName = "x86"
+]
+.ConfigX64 =
+[
+  .Compiler = "compilers/x64/cl.exe"
+  .ConfigName = "x64"
+]
+.Configs = { .ConfigX86, .ConfigX64 }
+
+ForEach( .Config in .Configs )
+{
+  Using( .Config )
+  Library( "Util-$ConfigName$" )
+  {
+    .CompilerInputPath  = 'libs/util/'
+    .CompilerOutputPath = 'out/$ConfigName$/'
+    .LibrarianOutput 	= 'out/$ConfigName$/Util.lib'
+  }
+}

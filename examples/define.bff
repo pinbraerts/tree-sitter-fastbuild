@@ -1,0 +1,11 @@
+# if __WINDOWS__
+    #define ENABLE_PDB_STORING
+# endif
+#if ENABLE_PDB_STORING
+#endif
+#define USE_CLANG_COMPILER
+#if __WINDOWS__
+    #undef USE_CLANG_COMPILER
+#endif
+#if USE_CLANG_COMPILER
+#endif

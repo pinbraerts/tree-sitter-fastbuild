@@ -1,0 +1,9 @@
+// Common.bff - containing common configuration options
+#once
+// LibraryA.bff
+#include "Common.bff"
+// LibraryB.bff
+#include "Common.bff"
+// fbuild.bff - the root config file
+#include "LibraryA.bff"
+#include "LibraryB.bff"

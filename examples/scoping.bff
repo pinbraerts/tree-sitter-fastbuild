@@ -1,0 +1,18 @@
+.MyString = 'hello'
+{
+  .MyString = 'goodbye'
+}
+; Mystring contains 'hello' again
+
+{
+  .MyString + ' hello'  ; string contains 'hello hello'
+}
+; Mystring contains 'hello' again
+
+.CompilerOptions     = '/c "%1" -o "%2"'
+
+.IncPaths            = { 'libA/inc/', 'libB/inc/' }
+ForEach( .IncPath in .IncPaths )
+{
+  ^CompilerOptions   + ' /I"$IncPath$"'
+}

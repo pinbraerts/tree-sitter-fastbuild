@@ -1,0 +1,16 @@
+; Declaration
+.MyString = "hello"
+
+; Concatenation
+.MyString + " there"
+          + " FASTBuild user" ; Uses last referenced variable automatically
+
+; Subtraction
+.MyString - " user" 
+          - "hello "; Uses last referenced variable automatically
+		  
+; Re-assignment
+.MyString = "hello"
+
+.StringA = "hello"
+.StringB = "$StringA$ FASTBuild user!"

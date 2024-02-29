@@ -1,0 +1,4 @@
+Library( "mylib" )                        ; can target "mylib"...
+{
+  .LibrarianOutput = "out\libs\mylib.lib" ; ...instead of this
+}

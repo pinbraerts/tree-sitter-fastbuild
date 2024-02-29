@@ -1,0 +1,15 @@
+function FunctionA()
+{
+  Print( 'Hello' )
+}
+
+function FunctionB( .Arg .Arg2 )
+{
+  If( .Arg1 == .Arg2 )
+  {
+    Print( 'Equal' )
+  }
+}
+
+FunctionA()
+FunctionB( 'ALiteralString' .APreviouslyDeclaredString )

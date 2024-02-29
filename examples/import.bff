@@ -1,0 +1,2 @@
+#import VS120COMNTOOLS
+.VisualStudio2012Compiler = '$VS120COMNTOOLS$\..\..\VC\bin\cl.exe'

@@ -1,0 +1,32 @@
+#if USE_MSVC
+    .CompilerOptions = '/c "%1" /Fo"%2"' 
+#else
+    .CompilerOptions = '-c "%1" -o "%2"' 
+#endif
+
+#if !__WINDOWS__
+    #define USE_CLANG
+#endif
+
+#define FIRST_CONDITION
+#define SECOND_CONDITION
+
+#if FIRST_CONDITION && SECOND_CONDITION
+    Print( 'Both conditions are true' )
+#endif
+
+#if FIRST_CONDITION || SECOND_CONDITION
+    Print( 'At least one of the two conditions is true' )
+#endif
+
+#if FIRST_CONDITION && !SECOND_CONDITION
+    Print( 'Inversion also works with booleans' )
+#endif
+
+#if exists(MY_ENV_VAR)
+    #import MY_ENV_VAR
+#endif
+
+#if file_exists("file.dat")
+    //
+#endif

@@ -1,0 +1,3 @@
+"This string has ^" in it"
+'This string has ^' in it'
+"Escape the ^$ and ^" symbols, or escape the ^^ itself."
