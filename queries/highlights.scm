@@ -35,7 +35,7 @@
 
 (builtin_variable) @constant.builtin
 
-(builtin_function) @function.builtin
+[ (builtin_function) "Print" "Error" "Using" "Settings" ] @function.builtin
 (function_call) @function.call
 (function_definition) @function
 (function_call (arguments) @variable.parameter)
