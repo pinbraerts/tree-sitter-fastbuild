@@ -456,7 +456,7 @@
     "fields": {
       "arguments": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "arguments",
@@ -492,7 +492,7 @@
     "fields": {
       "arguments": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "arguments",
@@ -502,7 +502,7 @@
       },
       "body": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "array",
@@ -723,7 +723,7 @@
     "fields": {
       "number": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "decimal",
@@ -985,6 +985,10 @@
     "named": false
   },
   {
+    "type": "*",
+    "named": false
+  },
+  {
     "type": "+",
     "named": false
   },
@@ -1018,6 +1022,10 @@
   },
   {
     "type": ">=",
+    "named": false
+  },
+  {
+    "type": "@",
     "named": false
   },
   {

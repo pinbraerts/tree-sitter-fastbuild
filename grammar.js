@@ -8,7 +8,7 @@ let precedence = {
 	in: 6,
 	not_in: 6,
 	not: 7,
-	function_call: 8,
+	function: 8,
 }
 
 module.exports = grammar({
@@ -134,18 +134,18 @@ module.exports = grammar({
 		arguments: $ => seq('(', repeat($.expression), ')'),
 		parenthesis: $ => seq('(', $.expression, ')'),
 
-		function_call: $ => prec.right(precedence.function_call, seq(
+		function_call: $ => prec.right(precedence.function, seq(
 			field('name', $.function),
-			field('arguments', $.arguments),
-			optional(field('body', $.array)),
+			field('arguments', optional($.arguments)),
+			field('body', optional($.array)),
 		)),
 
-		function_definition: $ => seq(
+		function_definition: $ => prec.right(precedence.function, seq(
 			'function',
 			field('name', $.identifier),
-			field('arguments', $.arguments),
-			field('body', $.array),
-		),
+			field('arguments', optional($.arguments)),
+			field('body', optional($.array)),
+		)),
 
 		expression: $ => choice(
 			$.literal,
