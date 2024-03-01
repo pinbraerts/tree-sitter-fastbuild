@@ -1,0 +1,104 @@
+==================
+Preprocessor Undef
+==================
+#undef USE_CLANG_COMPILER
+------------------
+(source_file
+ (preprocessor_undef (identifier))
+)
+
+===================
+Preprocessor Import
+===================
+   # 	import VS120COMNTOOLS
+-------------------
+(source_file
+ (preprocessor_import (environment_variable (identifier)))
+)
+
+====================
+Preprocessor Include
+====================
+  #    include "/some/file/full/path.txt"
+--------------------
+(source_file
+ (preprocessor_include (filename))
+)
+
+===================
+Preprocessor Define
+===================
+  #    define MACRO
+		  # 		define A
+-------------------
+(source_file
+ (preprocessor_define (identifier))
+ (preprocessor_define (identifier))
+)
+
+======================
+Preprocessor Condition
+======================
+#if exists ( HOME) && file_exists ("/full/path//to/file/.bin"	) || !a && b
+#endif
+----------------------
+(source_file
+ (preprocessor_if
+  condition: (or
+   left: (and
+    left: (exists (environment_variable (identifier)))
+    right: (file_exists (filename))
+   )
+   right: (and
+	left: (not (identifier))
+    right: (identifier)
+   )
+  )
+ )
+ (preprocessor_endif)
+)
+
+=================
+Preprocessor Else
+=================
+#if a
+#else
+	#if nested
+#    else
+	#endif
+#endif
+-----------------
+(source_file
+ (preprocessor_if condition: (identifier))
+ (preprocessor_else)
+ (preprocessor_if condition: (identifier))
+ (preprocessor_else)
+ (preprocessor_endif)
+ (preprocessor_endif)
+)
+
+====================
+Preprocessor in code
+====================
+.a = 3
+#if b
+	+ 3
+#else
+	- 3
+#endif
+--------------------
+(source_file
+ (sub
+  left: (add
+   left: (assign
+	left: (usage (identifier))
+    right: (decimal)
+   )
+   (preprocessor_if condition: (identifier))
+   right: (decimal)
+  )
+  (preprocessor_else)
+  right: (decimal)
+ )
+ (preprocessor_endif)
+)

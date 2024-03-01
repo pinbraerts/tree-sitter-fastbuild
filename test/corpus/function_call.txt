@@ -5,7 +5,7 @@ FunctionA()
 --------------
 (source_file
  (function_call
-  name: (user_function (identifier))
+  name: (identifier)
   arguments: (arguments)
  )
 )
@@ -17,10 +17,10 @@ FunctionB   ( 'ALiteralString', .APreviouslyDeclaredString )
 -----------
 (source_file
  (function_call
-  name: (user_function (identifier))
+  name: (identifier)
   arguments: (arguments
    (string (single_quoted))
-   (usage (variable (identifier)))
+   (usage (identifier))
   )
  )
 )
@@ -28,7 +28,7 @@ FunctionB   ( 'ALiteralString', .APreviouslyDeclaredString )
 =============
 Function Call
 =============
-Library ( "mylib" .Variable )
+Library ( "mylib" .identifier )
 {
 	.LibrarianOutput = "out\libs\mylib.lib"
 }
@@ -38,12 +38,12 @@ Library ( "mylib" .Variable )
   name: (builtin_function)
   arguments: (arguments
    (string (double_quoted))
-   (usage (variable (identifier)))
+   (usage (identifier))
   )
   body: (array
-   (compound
-	reference: (usage (variable (identifier)))
-	assign: (string (double_quoted))
+   (assign
+	left: (usage (identifier))
+	right: (string (double_quoted))
    )
   )
  )

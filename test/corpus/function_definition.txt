@@ -16,29 +16,31 @@ function FunctionB( .Arg .Arg2 )
 -------------------
 (source_file
  (function_definition
-  name: (user_function (identifier))
+  name: (identifier)
   arguments: (arguments)
   body: (array
-   (print
-	message: (string (single_quoted))
+   (function_call
+	name: (builtin_function)
+	arguments: (arguments (string (single_quoted)))
    )
   )
  )
  (function_definition
-  name: (user_function (identifier))
+  name: (identifier)
   arguments: (arguments
-   (usage (variable (identifier)))
-   (usage (variable (identifier)))
+   (usage (identifier))
+   (usage (identifier))
   )
   body: (array
    (if
-	condition: (comparison
-     lhs: (usage (variable (identifier)))
-     rhs: (usage (variable (identifier)))
+	condition: (compare
+     left:  (usage (identifier))
+     right: (usage (identifier))
     )
-    body: (array
-     (print
-	  message: (string (single_quoted))
+    consequence: (array
+     (function_call
+	  name: (builtin_function)
+	  arguments: (arguments (string (single_quoted)))
 	 )
     )
    )

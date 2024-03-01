@@ -1,0 +1,19 @@
+========
+Compound
+========
+.MyString = " there"
+          + " FASTBuild user"
+		  - "subtract"
+-------------
+(source_file
+ (sub
+  (add
+   (assign
+    (usage (identifier))
+    (string (double_quoted))
+   )
+   (string (double_quoted))
+  )
+  (string (double_quoted))
+ )
+)

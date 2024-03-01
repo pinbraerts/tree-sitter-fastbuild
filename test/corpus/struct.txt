@@ -1,0 +1,55 @@
+======
+Struct
+======
+.MyStruct =
+[
+  .MyString = "string"
+  .MyInt    = 7
+]
+------
+(source_file
+ (assign
+  (usage (identifier))
+  (struct
+   (assign
+    (usage (identifier))
+    (string (double_quoted))
+   )
+   (assign
+    (usage (identifier))
+    (decimal)
+   )
+  )
+ )
+)
+
+=============
+Nested Struct
+=============
+.StructA =
+[
+  .ArrayOfStrings     = { 'String1', 'String2' }
+  .String             = [ 'String', 7 ]
+]
+-------------
+(source_file
+ (assign
+  (usage (identifier))
+  (struct
+   (assign
+    (usage (identifier))
+    (array
+     (string (single_quoted))
+     (string (single_quoted))
+    )
+   )
+   (assign
+    (usage (identifier))
+    (struct
+     (string (single_quoted))
+     (decimal)
+    )
+   )
+  )
+ )
+)

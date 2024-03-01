@@ -200,7 +200,7 @@ module.exports = grammar({
 			'If', '(',
 			field('condition', $.expression),
 			')',
-			field('body', $.array),
+			field('consequence', $.array),
 		),
 
 		number: $ => $.decimal,

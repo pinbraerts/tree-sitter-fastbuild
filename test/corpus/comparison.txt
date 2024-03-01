@@ -1,0 +1,47 @@
+================
+compare Equal
+================
+.IntA == .IntB
+----------------
+(source_file
+ (compare
+  left:  (usage (identifier))
+  right: (usage (identifier))
+ )
+)
+
+====================
+compare Not Equal
+====================
+.IntA == .IntB
+--------------------
+(source_file
+ (compare
+  left:  (usage (identifier))
+  right: (usage (identifier))
+ )
+)
+
+==================
+compare Greater
+==================
+.IntA > .IntB
+------------------
+(source_file
+ (compare
+  left:  (usage (identifier))
+  right: (usage (identifier))
+ )
+)
+
+===============
+compare Less
+===============
+.IntA < .IntB
+---------------
+(source_file
+ (compare
+  left:  (usage (identifier))
+  right: (usage (identifier))
+ )
+)

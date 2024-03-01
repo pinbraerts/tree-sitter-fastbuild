@@ -1,0 +1,25 @@
+========
+Variable
+========
+.custom = {}
+._CURRENT_BFF_DIR_ = {}
+."constructed$from$other" = {}
+--------
+(source_file
+ (assign
+  (usage (identifier))
+  (array)
+ )
+ (assign
+  (usage (builtin_variable))
+  (array)
+ )
+ (assign
+  (usage (string
+   (double_quoted)
+   (interpolation (identifier))
+   (double_quoted)
+  ))
+  (array)
+ )
+)

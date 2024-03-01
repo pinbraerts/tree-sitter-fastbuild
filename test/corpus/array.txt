@@ -25,9 +25,9 @@ Nested Array
   )
   (decimal)
   (decimal)
-  (compound
-   reference: (usage (variable (identifier)))
-   assign: (struct
+  (assign
+   (usage (identifier))
+   (struct
     (decimal)
     (decimal)
     (decimal)

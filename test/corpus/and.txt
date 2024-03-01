@@ -1,0 +1,44 @@
+===
+And
+===
+.MyBoolean && .AnotherBoolean
+---
+(source_file
+ (and
+  left:  (usage (identifier))
+  right: (usage (identifier))
+ )
+)
+
+============
+And Multiple
+============
+.Bool1 && .Bool2 && .Bool3
+------------
+(source_file
+ (and
+  left: (and
+   left:  (usage (identifier))
+   right: (usage (identifier))
+  )
+  right: (usage (identifier))
+ )
+)
+
+===============
+And Parenthesis
+===============
+( 1 <= .Int ) && ( .Int <= 10 )
+---------------
+(source_file
+ (and
+  left: (parenthesis (compare
+   left:  (decimal)
+   right: (usage (identifier))
+  ))
+  right: (parenthesis (compare
+   left:  (usage (identifier))
+   right: (decimal)
+  ))
+ )
+)

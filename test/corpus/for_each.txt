@@ -1,0 +1,29 @@
+========
+For Each
+========
+ForEach( .IncPath in .IncPaths )
+{
+  ^CompilerOptions   + ' /I"$IncPath$"'
+}
+--------
+(source_file
+ (function_call
+  name: (builtin_function)
+  arguments: (arguments
+   (in
+    left:  (usage (identifier))
+    right: (usage (identifier))
+   )
+  )
+  body: (array
+   (add
+    left: (promotion (identifier))
+    right: (string
+     (single_quoted)
+     (interpolation (identifier))
+     (single_quoted)
+    )
+   )
+  )
+ )
+)

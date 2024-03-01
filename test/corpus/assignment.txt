@@ -7,24 +7,24 @@ Assignment
 .MyArray = { "aaa", "bbb", "ccc" }
 ----------
 (source_file
- (compound
-  reference: (usage (variable (identifier)))
-  assign: (string
+ (assign
+  (usage (identifier))
+  (string
    (interpolation (identifier))
    (double_quoted)
   )
  )
- (compound
-  reference: (usage (variable (identifier)))
-  assign: (boolean)
+ (assign
+  (usage (identifier))
+  (boolean)
  )
- (compound
-  reference: (usage (variable (identifier)))
-  assign: (decimal)
+ (assign
+  (usage (identifier))
+  (decimal)
  )
- (compound
-  reference: (usage (variable (identifier)))
-  assign: (array
+ (assign
+  (usage (identifier))
+  (array
    (string (double_quoted))
    (string (double_quoted))
    (string (double_quoted))
