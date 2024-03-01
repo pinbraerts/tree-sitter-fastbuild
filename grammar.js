@@ -216,25 +216,6 @@ module.exports = grammar({
 			$.settings,
 		),
 
-		error: $ => seq('Error', '(', field('message', $.string), ')'),
-		print: $ => seq('Print', '(', field('message', $.string), ')'),
-		using: $ => seq('Using', '(', field('struct', $.usage), ')'),
-		settings: $ => seq('Settings', field('settings', $.array)),
-
-		for_each: $ => seq(
-			'ForEach', '(',
-			repeat1(choice(field('iterator', $.in), $._separator)),
-			')',
-			field('body', $.array),
-		),
-
-		if: $ => seq(
-			'If', '(',
-			field('condition', $.condition),
-			')',
-			field('body', $.array),
-		),
-
 		condition: $ => choice(
 			$.primary,
 			$.comparison,
@@ -281,6 +262,25 @@ module.exports = grammar({
 			$.boolean,
 		),
 
+		error: $ => seq('Error', '(', field('message', $.string), ')'),
+		print: $ => seq('Print', '(', field('message', $.string), ')'),
+		using: $ => seq('Using', '(', field('struct', $.usage), ')'),
+		settings: $ => seq('Settings', field('settings', $.array)),
+
+		for_each: $ => seq(
+			'ForEach', '(',
+			repeat1(choice(field('iterator', $.in), $._separator)),
+			')',
+			field('body', $.array),
+		),
+
+		if: $ => seq(
+			'If', '(',
+			field('condition', $.condition),
+			')',
+			field('body', $.array),
+		),
+
 		builtin_function: _ => choice(
 			"Alias",
 			"Compiler",
@@ -319,72 +319,3 @@ module.exports = grammar({
 
 	},
 })
-/*
-%YAML 1.2
----
-name: FASTBuild
-file_extensions: [bff]
-scope: source.bff
-
-contexts:
-  in-double-quotes:
-    - match: \$\w*\$
-      scope: variable.other
-    - match: "[^\"]"
-      scope: string.quoted.double
-    - match: \"
-      pop: true
-      scope: string.quoted.double
-  double-quoted-strings:
-    - match: \"
-      push: in-double-quotes
-      scope: string.quoted.double
-
-  in-single-quotes:
-    - match: \$\w*\$
-      scope: variable.other
-    - match: "[^']"
-      scope: string.quoted.single
-    - match: "'"
-      pop: true
-      scope: string.quoted.single
-  single-quoted-strings:
-    - match: "'"
-      push: in-single-quotes
-      scope: string.quoted.single
-
-  preprocessor-includes:
-    - match: "^\\s*(#\\s*\\binclude)\\b"
-      captures:
-        1: keyword.control.include.c++
-  preprocessor-import:
-    - match: ^\s*(#)\s*\b(import)\b
-      scope: keyword.control.c
-
-  preprocessor:
-    - include: scope:source.c#incomplete-inc
-    - include: preprocessor-macro-define
-    - include: scope:source.c#pragma-mark
-    - include: preprocessor-includes
-    - include: preprocessor-import
-  global:
-    - include: preprocessor
-    - include: double-quoted-strings
-    - include: single-quoted-strings
-  main:
-    - include: global
-    - match: \b(Alias|CSAssembly|Compiler|Copy|CopyDir|DLL|Error|Exec|Executable|ForEach|If|Library|ListDependencies|ObjectList|Print|RemoveDir|Settings|Test|TextFile|Unity|Using|VCXProject|VSProjectExternal|VSSolution|XCodeProject)\b
-      scope: support.function
-    - match: \+|=-
-      scope: keyword.operator
-    - match: \,
-      scope: punctuation.separator
-    - match: \{
-      scope: punctuation.section.block.begin
-    - match: \}
-      scope: punctuation.section.block.end
-    - match: \.\w+|\^\w+
-      scope: variable
-    - match: //.*|;.*
-      scope: comment.line
-	  */
