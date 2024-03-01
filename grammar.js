@@ -263,17 +263,6 @@ module.exports = grammar({
 			$.boolean,
 		),
 
-		error: $ => seq('Error', '(', field('message', $.string), ')'),
-		print: $ => seq('Print', '(', field('message', $.string), ')'),
-		using: $ => seq('Using', '(', field('struct', $.usage), ')'),
-		settings: $ => seq('Settings', field('settings', $.array)),
-
-		for_each: $ => seq(
-			'ForEach', '(',
-			repeat1(choice(field('iterator', $.in), $._separator)),
-			')',
-			field('body', $.array),
-		),
 
 		if: $ => seq(
 			'If', '(',
@@ -289,15 +278,20 @@ module.exports = grammar({
 			"CopyDir",
 			"CSAssembly",
 			"DLL",
+			"Error",
 			"Exec",
 			"Executable",
+			"ForEach",
 			"Library",
 			"ListDependencies",
 			"ObjectList",
+			"Print",
 			"RemoveDir",
+			"Settings",
 			"Test",
 			"TextFile",
 			"Unity",
+			"Using",
 			"VCXProject",
 			"VSProjectExternal",
 			"VSSolution",
