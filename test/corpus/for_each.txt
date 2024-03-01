@@ -17,7 +17,7 @@ ForEach( .IncPath in .IncPaths )
   )
   body: (array
    (add
-    left: (promotion (identifier))
+    left: (usage (identifier))
     right: (string
      (single_quoted)
      (interpolation (identifier))

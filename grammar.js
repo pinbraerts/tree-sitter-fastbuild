@@ -126,8 +126,7 @@ module.exports = grammar({
 		environment_variable: $ => $.identifier,
 		variable: $ => choice($.builtin_variable, $.identifier, $.builtin_macros),
 		function: $ => choice($.builtin_function, $.identifier),
-		usage: $ => seq('.', choice($.variable, $.string)),
-		promotion: $ => seq('^', choice($.variable, $.string)),
+		usage: $ => seq(choice('.', '^'), choice($.variable, $.string)),
 
 		array: $ => seq('{', repeat($.expression), '}'),
 		struct: $ => seq('[', repeat($.expression), ']'),
@@ -150,7 +149,6 @@ module.exports = grammar({
 		expression: $ => choice(
 			$.literal,
 			$.usage,
-			$.promotion,
 			$.array,
 			$.struct,
 			$.parenthesis,

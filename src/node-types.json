@@ -68,10 +68,6 @@
         "named": true
       },
       {
-        "type": "promotion",
-        "named": true
-      },
-      {
         "type": "struct",
         "named": true
       },
@@ -802,25 +798,6 @@
       "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "promotion",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "string",
-          "named": true
-        },
         {
           "type": "variable",
           "named": true
