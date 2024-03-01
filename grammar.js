@@ -26,21 +26,22 @@ module.exports = grammar({
 
 	word: $ => $.identifier,
 
-	inline: $ => [
+	supertypes: $ => [
 		$.condition,
 		$.primary,
 		$.control_flow,
-		$.operator,
-		$.else_directive,
-		$.condition_directive,
 		$.directive,
 		$.expression,
 		$.statement,
-		$.macros,
-		$.double_inner,
-		$.single_inner,
-		$.body,
 		$.number,
+	],
+
+	inline: $ => [
+		$.reference,
+		$.else_directive,
+		$.condition_directive,
+		$.macros,
+		$.body,
 	],
 
 	rules: {
@@ -49,16 +50,16 @@ module.exports = grammar({
 		_whitespace: _ => token(/[\s\t]+/),
 		newline: _ => token(/\r?\n/),
 		string: $ => choice(
-			seq("'", repeat($.single_inner), "'"),
-			seq('"', repeat($.double_inner), '"'),
+			seq("'", repeat($._single_inner), "'"),
+			seq('"', repeat($._double_inner), '"'),
 		),
-		single_inner: $ => choice(
+		_single_inner: $ => choice(
 			$.single_quoted,
 			$.interpolation,
 			$.placeholder,
 			$.escape_sequence,
 		),
-		double_inner: $ => choice(
+		_double_inner: $ => choice(
 			$.double_quoted,
 			$.interpolation,
 			$.placeholder,
@@ -161,6 +162,7 @@ module.exports = grammar({
 		propagation: $ => seq('^', choice($.variable, $.string)),
 		reference: $ => choice($.usage, $.propagation),
 		statement: $ => choice(
+			$.primary,
 			$.compound,
 			$.array,
 			$.function_call,
@@ -174,16 +176,16 @@ module.exports = grammar({
 		),
 		compound: $ => seq(
 			$.reference,
-			choice($.assignment, $.operator),
-			repeat($.operator),
+			choice($._assignment, $._operator),
+			repeat($._operator),
 		),
-		operator: $ => choice(
-			$.concatenation,
-			$.subtraction,
+		_operator: $ => choice(
+			$._concatenation,
+			$._subtraction,
 		),
-		assignment:    $ => seq('=', field('assign', $.expression)),
-		concatenation: $ => seq('+', field('concat', $.expression)),
-		subtraction:   $ => seq('-', field('subtract', $.expression)),
+		_assignment:    $ => seq('=', field('assign', $.expression)),
+		_concatenation: $ => seq('+', field('concat', $.expression)),
+		_subtraction:   $ => seq('-', field('subtract', $.expression)),
 		boolean: _ => choice(
 			'true', 'false'
 		),
