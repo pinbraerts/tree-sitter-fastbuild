@@ -11,10 +11,6 @@ let precedence = {
 	function_call: 8,
 }
 
-function preprocessor(x) {
-	return alias(seq(x[0], x.substr(1)), x)
-}
-
 module.exports = grammar({
 	name: "fastbuild",
 
@@ -22,6 +18,7 @@ module.exports = grammar({
 		$.comment,
 		$._whitespace,
 		$.newline,
+		$._preprocessor,
 	],
 
 	word: $ => $.identifier,
@@ -35,15 +32,15 @@ module.exports = grammar({
 		$.statement,
 		$.number,
 		$.variable,
-		$.macros,
 		$.function,
-		$.reference,
+		$.preprocessor_expression,
 	],
 
 	inline: $ => [
-		$.preprocessor_else,
-		$.preprocessor_condition,
-		$.body,
+	],
+
+	externals: $ => [
+		$._preprocessor_end,
 	],
 
 	rules: {
@@ -78,62 +75,45 @@ module.exports = grammar({
 		interpolation: $ => seq(token.immediate('$'), $.identifier, '$'),
 		placeholder:   $ => seq(token.immediate('%'), field('number', $.number)),
 
-		preprocessor_simple: $ => choice(
+		_preprocessor: $ => seq('#', choice(
 			$.preprocessor_define,
 			$.preprocessor_undef,
 			$.preprocessor_if,
 			$.preprocessor_import,
 			$.preprocessor_include,
 			$.preprocessor_once,
-		),
-		preprocessor_define: $ => seq(
-			preprocessor('#define'),
-			$.macros,
-		),
-		preprocessor_undef: $ => seq(
-			preprocessor('#undef'),
-			$.macros,
-		),
-		preprocessor_if: $ => seq(
-			preprocessor('#if'),
-			field('condition', $.preprocessor_condition),
-			optional(field('body', $.body)),
-			optional($.preprocessor_else),
-			preprocessor('#endif'),
-		),
-		preprocessor_else: $ => seq(
-			preprocessor('#else'),
-			optional(field('else', $.body)),
-		),
-		preprocessor_import: $ => seq(
-			preprocessor('#import'),
-			$.environment_variable,
-		),
-		preprocessor_include: $ => seq(
-			preprocessor('#include'),
-			$.filename,
-		),
-		preprocessor_once: $ => preprocessor('#once'),
-		preprocessor_condition: $ => choice(
+			$.preprocessor_else,
+			$.preprocessor_endif,
+		), $._preprocessor_end),
+		preprocessor_define: $ => seq('define', $.variable),
+		preprocessor_undef: $ => seq('undef', $.variable),
+		preprocessor_import: $ => seq('import', $.environment_variable),
+		preprocessor_include: $ => seq('include', $.filename),
+		preprocessor_if: $ => seq('if', field('condition', $.preprocessor_expression)),
+		preprocessor_else: _ => "else",
+		preprocessor_endif: _ => "endif",
+		preprocessor_once: _ => "once",
+		preprocessor_expression: $ => choice(
+			$.literal,
+			$.variable,
+			alias($.preprocessor_not, $.not),
+			alias($.preprocessor_and, $.and),
+			alias($.preprocessor_or, $.or),
 			$.exists,
 			$.file_exists,
-			$.preprocessor_or,
-			$.preprocessor_and,
-			$.preprocessor_negate,
-			$.macros,
 		),
 		preprocessor_or: $ => prec.left(precedence.or, seq(
-			field('lhs', $.preprocessor_condition),
-			choice('or', '||'),
-			field('rhs', $.preprocessor_condition),
+			field('left', $.preprocessor_expression),
+			'||',
+			field('right', $.preprocessor_expression),
 		)),
 		preprocessor_and: $ => prec.left(precedence.and, seq(
-			field('lhs', $.preprocessor_condition),
-			choice('and', '&&'),
-			field('rhs', $.preprocessor_condition),
+			field('left', $.preprocessor_expression),
+			'&&',
+			field('right', $.preprocessor_expression),
 		)),
-		preprocessor_negate: $ => prec(precedence.negate, seq(
-			'!', $.preprocessor_condition
+		preprocessor_not: $ => prec.right(precedence.not, seq(
+			'!', $.preprocessor_expression,
 		)),
 
 		environment_variable: $ => $.identifier,
