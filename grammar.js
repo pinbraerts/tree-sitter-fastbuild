@@ -122,12 +122,6 @@ module.exports = grammar({
 			$.preprocessor_negate,
 			$.macros,
 		),
-		exists: $ => seq(
-			'exists', '(', $.environment_variable, ')',
-		),
-		file_exists: $ => seq(
-			'file_exists', '(', $.filename, ')',
-		),
 		preprocessor_or: $ => prec.left(precedence.or, seq(
 			field('lhs', $.preprocessor_condition),
 			choice('or', '||'),
@@ -266,6 +260,9 @@ module.exports = grammar({
 			field('body', $.array),
 		),
 
+		number: $ => $.decimal,
+		boolean: _ => choice('true', 'false'),
+
 		builtin_function: _ => choice(
 			"Alias",
 			"Compiler",
@@ -306,6 +303,9 @@ module.exports = grammar({
 			'__OSX__',
 			'__WINDOWS__',
 		),
+
+		exists: $ => seq('exists', '(', $.environment_variable, ')'),
+		file_exists: $ => seq('file_exists', '(', $.filename, ')'),
 
 	},
 })
