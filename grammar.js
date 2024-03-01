@@ -46,9 +46,16 @@ module.exports = grammar({
 
 	rules: {
 		source_file: $ => optional($.body),
-		comment: _ => token(/\/\/.*|;.*/),
-		_whitespace: _ => token(/[\s\t]+/),
-		newline: _ => token(/\r?\n/),
+		comment:           _ => token(/\/\/.*|;.*/),                    
+		_whitespace:       _ => token(/[\s\t]+/),                       
+		newline:           _ => token(/\r?\n/),                         
+		macros_definition: _ => token(/.+/),                            
+		decimal:           _ => token(/\d[\d_]*(\.[\d_]*)?(e[\d_]+)?/), 
+		filename:          _ => token(/"[\/\.\w\- ]+"/),
+		identifier:        _ => token(/[a-zA-Z_][\w_]*/),               
+		single_quoted:     _ => token.immediate(/[^^$%']+?/),           
+		double_quoted:     _ => token.immediate(/[^^$%"]+?/),           
+		escape_sequence:   _ => token.immediate(/\^./),                 
 		string: $ => choice(
 			seq("'", repeat($._single_inner), "'"),
 			seq('"', repeat($._double_inner), '"'),
@@ -65,12 +72,9 @@ module.exports = grammar({
 			$.placeholder,
 			$.escape_sequence,
 		),
-		single_quoted: _ => token.immediate(/[^^$%']+?/),
-		double_quoted: _ => token.immediate(/[^^$%"]+?/),
-		escape_sequence: _ => token.immediate(/\^./),
-		interpolation: $ => seq(token.immediate('$'), $.identifier, '$'),
-		placeholder: $ => seq(token.immediate('%'), field('number', $.number)),
 		environment_variable: $ => $.identifier,
+		interpolation: $ => seq(token.immediate('$'), $.identifier, '$'),
+		placeholder:   $ => seq(token.immediate('%'), field('number', $.number)),
 
 		preprocessor_simple: $ => choice(
 			$.preprocessor_define,
@@ -139,14 +143,7 @@ module.exports = grammar({
 			$.builtin_macros,
 			$.user_macros,
 		),
-		builtin_macros: _ => choice(
-			'__LINUX__',
-			'__OSX__',
-			'__WINDOWS__',
-		),
 		user_macros: $ => $.identifier,
-
-		macros_definition: _ => token(/.+/),
 
 		_separator: _ => ',',
 		body: $ => prec(precedence.top_level, repeat1(choice(
@@ -155,8 +152,6 @@ module.exports = grammar({
 			$._separator,
 		))),
 
-		filename: _ => token(/"[\/\.\w\- ]+"/),
-		identifier: _ => token(/[a-zA-Z_][\w_]*/),
 		variable: $ => choice($.builtin_variable, $.identifier),
 		usage: $ => seq('.', choice($.variable, $.string)),
 		propagation: $ => seq('^', choice($.variable, $.string)),
@@ -192,7 +187,6 @@ module.exports = grammar({
 		number: $ => choice(
 			$.decimal,
 		),
-		decimal: _ => token(/\d[\d_]*(\.[\d_]*)?(e[\d_]+)?/),
 
 		array: $ => seq('{', optional($.body), '}'),
 		struct: $ => seq('[', optional($.body), ']'),
@@ -315,6 +309,12 @@ module.exports = grammar({
 			"_FASTBUILD_VERSION_",
 			"_FASTBUILD_EXE_PATH_",
 			"_WORKING_DIR_",
+		),
+
+		builtin_macros: _ => choice(
+			'__LINUX__',
+			'__OSX__',
+			'__WINDOWS__',
 		),
 
 	},
