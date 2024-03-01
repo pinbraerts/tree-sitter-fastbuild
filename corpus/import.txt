@@ -1,8 +1,0 @@
-======
-Import
-======
-   # 	import VS120COMNTOOLS
-------
-(source_file
- (import (environment_variable (identifier)))
-)

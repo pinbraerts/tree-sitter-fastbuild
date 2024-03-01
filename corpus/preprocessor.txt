@@ -1,0 +1,78 @@
+=====
+Undef
+=====
+#undef USE_CLANG_COMPILER
+-----
+(source_file
+ (undef (user_macros (identifier)))
+)
+
+======
+Import
+======
+   # 	import VS120COMNTOOLS
+------
+(source_file
+ (import (environment_variable (identifier)))
+)
+
+=======
+Include
+=======
+  #    include "/some/file/full/path.txt"
+-------
+(source_file
+ (include (filename))
+)
+
+======
+Define
+======
+#define A
+#define MACRO
+------
+(source_file
+ (define (user_macros (identifier)))
+ (define (user_macros (identifier)))
+)
+
+=========
+Condition
+=========
+#if exists ( HOME) and file_exists ("/full/path//to/file/.bin"	) or !a and b
+#endif
+---------
+(source_file
+ (if_directive
+  condition: (or_directive
+   lhs: (and_directive
+    lhs: (exists (environment_variable (identifier)))
+    rhs: (file_exists (filename))
+   )
+   rhs: (and_directive
+	lhs: (negate_directive (user_macros (identifier)))
+    rhs: (user_macros (identifier))
+   )
+  )
+ )
+)
+
+====
+Else
+====
+#if a
+#else
+	#if nested
+#    else
+	#endif
+#endif
+----
+(source_file
+ (if_directive
+  condition: (user_macros (identifier))
+  else: (if_directive
+   condition: (user_macros (identifier))
+  )
+ )
+)
+

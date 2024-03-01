@@ -175,7 +175,7 @@ module.exports = grammar({
 			$.primary,
 		),
 		compound: $ => seq(
-			$.reference,
+			field('reference', $.reference),
 			choice($._assignment, $._operator),
 			repeat($._operator),
 		),

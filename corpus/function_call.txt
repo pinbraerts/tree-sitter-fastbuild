@@ -1,18 +1,21 @@
-=============
-Function Call
-=============
+==============
+Primitive Call
+==============
 FunctionA()
-FunctionB   ( 'ALiteralString', .APreviouslyDeclaredString )
-Library ( "mylib" .Variable )
-{
-	.LibrarianOutput = "out\libs\mylib.lib"
-}
--------------
+--------------
 (source_file
  (function_call
   name: (user_function (identifier))
   arguments: (arguments)
  )
+)
+
+===========
+Simple Call
+===========
+FunctionB   ( 'ALiteralString', .APreviouslyDeclaredString )
+-----------
+(source_file
  (function_call
   name: (user_function (identifier))
   arguments: (arguments
@@ -20,6 +23,17 @@ Library ( "mylib" .Variable )
    (usage (variable (identifier)))
   )
  )
+)
+
+=============
+Function Call
+=============
+Library ( "mylib" .Variable )
+{
+	.LibrarianOutput = "out\libs\mylib.lib"
+}
+-------------
+(source_file
  (function_call
   name: (builtin_function)
   arguments: (arguments
@@ -27,9 +41,9 @@ Library ( "mylib" .Variable )
    (usage (variable (identifier)))
   )
   body: (array
-   (assignment
-	lhs: (usage (variable (identifier)))
-	rhs: (string (double_quoted))
+   (compound
+	reference: (usage (variable (identifier)))
+	assign: (string (double_quoted))
    )
   )
  )

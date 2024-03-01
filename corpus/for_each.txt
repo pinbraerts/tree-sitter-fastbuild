@@ -13,9 +13,9 @@ ForEach( .IncPath in .IncPaths )
    rhs: (usage (variable (identifier)))
   )
   body: (array
-   (concatenation
-	lhs: (propagation (variable (identifier)))
-	rhs: (string
+   (compound
+	reference: (propagation (variable (identifier)))
+	concat: (string
      (single_quoted)
 	 (interpolation (identifier))
 	 (single_quoted)

@@ -1,16 +1,25 @@
 ========
 Variable
 ========
-.custom
-._CURRENT_BFF_DIR_
-."constructed$from$other"
+.custom = {}
+._CURRENT_BFF_DIR_ = {}
+."constructed$from$other" = {}
 --------
 (source_file
- (usage (variable (identifier)))
- (usage (variable (builtin_variable)))
- (usage (string
-  (double_quoted)
-  (interpolation (identifier))
-  (double_quoted)
- ))
+ (compound
+  reference: (usage (variable (identifier)))
+  assign: (array)
+ )
+ (compound
+  reference: (usage (variable (builtin_variable)))
+  assign: (array)
+ )
+ (compound
+  reference: (usage (string
+   (double_quoted)
+   (interpolation (identifier))
+   (double_quoted)
+  ))
+  assign: (array)
+ )
 )
