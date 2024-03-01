@@ -46,8 +46,9 @@ module.exports = grammar({
 
 	rules: {
 		source_file: $ => optional($.body),
-		comment:           _ => token(/\/\/.*|;.*/),                    
+		_separator:        _ => ',',
 		_whitespace:       _ => token(/[\s\t]+/),                       
+		comment:           _ => token(/\/\/.*|;.*/),                    
 		newline:           _ => token(/\r?\n/),                         
 		macros_definition: _ => token(/.+/),                            
 		decimal:           _ => token(/\d[\d_]*(\.[\d_]*)?(e[\d_]+)?/), 
@@ -145,7 +146,6 @@ module.exports = grammar({
 		),
 		user_macros: $ => $.identifier,
 
-		_separator: _ => ',',
 		body: $ => prec(precedence.top_level, repeat1(choice(
 			$.preprocessor_simple,
 			$.statement,
