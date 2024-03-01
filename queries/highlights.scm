@@ -1,12 +1,3 @@
-(variable) @variable
-
-(string) @string
-(filename) @string
-[ (escape_sequence) (interpolation) (placeholder) ] @string.escape
-(interpolation "$" @punctuation.special)
-(placeholder "%" @punctuation.special)
-; ("," @punctuation.delimiter)
-
 [
  "[" "]"
  "(" ")"
@@ -15,6 +6,8 @@
 
 "If" @keyword.conditional
 "ForEach" @keyword.repeat
+
+[ "." "^" ] @punctuation.special
 
 [
  "+" "-"
@@ -31,30 +24,36 @@
  "not"
 ] @keyword.operator
 
-(decimal) @number
-
 (builtin_variable) @constant.builtin
 
-[ (builtin_function) "Print" "Error" "Using" "Settings" ] @function.builtin
-(function_call) @function.call
-(function_definition) @function
-(function_call (arguments) @variable.parameter)
-(print message: (string) @variable.parameter)
-(error message: (string) @variable.parameter)
-(using struct: (usage) @variable.parameter)
-
-(user_macros)    @function.macro
-(builtin_macros) @function.builtin.macro
-
-[ "true" "false" ] @boolean
+(builtin_function) @function.builtin
+(function_call (identifier) @function.call)
+(function_definition "function" @keyword.function)
+(function_definition (identifier) @function)
 
 (comment) @comment @spell
 
 [
- "#undef"
- "#if" "#else" "#endif"
- "#once"
+ "undef"
+ "if"
+ (preprocessor_else)
+ (preprocessor_endif)
+ (preprocessor_once)
 ] @keyword.directive
-[ "#import" "#include" ] @keyword.import
-"#define" @keyword.directive.define
+[ "import" "include" ] @keyword.import
+"define" @keyword.directive.define
+"#" @keyword.punctuation.special
 
+(usage     (identifier) @variable)
+(promotion (identifier) @variable)
+(arguments (usage (identifier) @variable.parameter))
+(arguments (expression (usage (identifier) @variable.parameter)))
+(preprocessor_if (identifier) @function.macro)
+(builtin_macros) @function.builtin.macro
+(array (expression (usage (identifier) @variable)))
+(decimal) @number
+[ "true" "false" ] @boolean
+[ (filename) (string) ] @string
+[ (escape_sequence) (interpolation) (placeholder) ] @string.escape
+(interpolation "$" @punctuation.special)
+(placeholder "%" @punctuation.special)
