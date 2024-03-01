@@ -43,7 +43,7 @@ module.exports = grammar({
 	rules: {
 		source_file: $ => repeat($.expression),
 		_separator:        _ => ',',
-		_whitespace:       _ => token(/[\s\t]+/),                       
+		_whitespace:       _ => token(/[\s\u00A0\uFEFF\u3000]+/),                       
 		comment:           _ => token(/\/\/.*|;.*/),                    
 		_newline:          _ => token(/\r?\n/),                         
 		decimal:           _ => token(/[\d_]+/), 
