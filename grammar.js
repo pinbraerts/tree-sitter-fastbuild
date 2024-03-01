@@ -11,7 +11,7 @@ let precedence = {
 	function_call: 8,
 }
 
-function preprocessor($, x) {
+function preprocessor(x) {
 	return alias(seq(x[0], x.substr(1)), x)
 }
 
@@ -81,33 +81,33 @@ module.exports = grammar({
 			$.once,
 		),
 		define: $ => seq(
-			preprocessor($, '#define'),
+			preprocessor('#define'),
 			$.macros,
 		),
 		undef: $ => seq(
-			preprocessor($, '#undef'),
+			preprocessor('#undef'),
 			$.macros,
 		),
 		if_directive: $ => seq(
-			preprocessor($, '#if'),
+			preprocessor('#if'),
 			field('condition', $.condition_directive),
 			optional(field('body', $.body)),
 			optional($.else_directive),
-			preprocessor($, '#endif'),
+			preprocessor('#endif'),
 		),
 		else_directive: $ => seq(
-			preprocessor($, '#else'),
+			preprocessor('#else'),
 			optional(field('else', $.body)),
 		),
 		import: $ => seq(
-			preprocessor($, '#import'),
+			preprocessor('#import'),
 			$.environment_variable,
 		),
 		include: $ => seq(
-			preprocessor($, '#include'),
+			preprocessor('#include'),
 			$.filename,
 		),
-		once: $ => preprocessor($, '#once'),
+		once: $ => preprocessor('#once'),
 		condition_directive: $ => choice(
 			$.exists,
 			$.file_exists,
