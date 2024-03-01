@@ -34,13 +34,15 @@ module.exports = grammar({
 		$.expression,
 		$.statement,
 		$.number,
+		$.variable,
+		$.macros,
+		$.function,
+		$.reference,
 	],
 
 	inline: $ => [
-		$.reference,
 		$.preprocessor_else,
 		$.preprocessor_condition,
-		$.macros,
 		$.body,
 	],
 
@@ -73,7 +75,6 @@ module.exports = grammar({
 			$.placeholder,
 			$.escape_sequence,
 		),
-		environment_variable: $ => $.identifier,
 		interpolation: $ => seq(token.immediate('$'), $.identifier, '$'),
 		placeholder:   $ => seq(token.immediate('%'), field('number', $.number)),
 
@@ -140,12 +141,17 @@ module.exports = grammar({
 		preprocessor_negate: $ => prec(precedence.negate, seq(
 			'!', $.preprocessor_condition
 		)),
-		macros: $ => choice(
-			$.builtin_macros,
-			$.user_macros,
-		),
+
+		environment_variable: $ => $.identifier,
 		user_macros: $ => $.identifier,
+		user_function: $ => $.identifier,
+		user_variable: $ => $.identifier,
+		variable: $ => choice($.builtin_variable, $.user_variable),
+		macros: $ => choice($.builtin_macros, $.user_macros),
 		function: $ => choice($.builtin_function, $.user_function),
+		reference: $ => choice($.usage, $.promotion),
+		usage: $ => seq('.', choice($.variable, $.string)),
+		promotion: $ => seq('^', choice($.variable, $.string)),
 
 		body: $ => prec(precedence.top_level, repeat1(choice(
 			$.preprocessor_simple,
@@ -153,10 +159,6 @@ module.exports = grammar({
 			$._separator,
 		))),
 
-		variable: $ => choice($.builtin_variable, $.identifier),
-		usage: $ => seq('.', choice($.variable, $.string)),
-		propagation: $ => seq('^', choice($.variable, $.string)),
-		reference: $ => choice($.usage, $.propagation),
 		statement: $ => choice(
 			$.primary,
 			$.compound,
@@ -205,8 +207,6 @@ module.exports = grammar({
 			field('arguments', $.arguments),
 			field('body', $.array),
 		),
-
-		user_function: $ => $.identifier,
 
 		control_flow: $ => choice(
 			$.for_each,
