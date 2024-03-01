@@ -69,7 +69,7 @@ module.exports = grammar({
 			$.escape_sequence,
 		),
 		interpolation: $ => seq(token.immediate('$'), $.identifier, '$'),
-		placeholder:   $ => seq(token.immediate('%'), field('number', $.number)),
+		placeholder:   $ => seq(token.immediate('%'), field('number', $.decimal)),
 
 		_preprocessor: $ => seq('#', choice(
 			$.preprocessor_define,
