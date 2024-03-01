@@ -1,104 +1,214 @@
 [
   {
-    "type": "and",
+    "type": "expression",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "add",
+        "named": true
+      },
+      {
+        "type": "and",
+        "named": true
+      },
+      {
+        "type": "array",
+        "named": true
+      },
+      {
+        "type": "assign",
+        "named": true
+      },
+      {
+        "type": "compare",
+        "named": true
+      },
+      {
+        "type": "exists",
+        "named": true
+      },
+      {
+        "type": "file_exists",
+        "named": true
+      },
+      {
+        "type": "function_call",
+        "named": true
+      },
+      {
+        "type": "function_definition",
+        "named": true
+      },
+      {
+        "type": "if",
+        "named": true
+      },
+      {
+        "type": "in",
+        "named": true
+      },
+      {
+        "type": "literal",
+        "named": true
+      },
+      {
+        "type": "not",
+        "named": true
+      },
+      {
+        "type": "not_in",
+        "named": true
+      },
+      {
+        "type": "or",
+        "named": true
+      },
+      {
+        "type": "parenthesis",
+        "named": true
+      },
+      {
+        "type": "promotion",
+        "named": true
+      },
+      {
+        "type": "struct",
+        "named": true
+      },
+      {
+        "type": "sub",
+        "named": true
+      },
+      {
+        "type": "usage",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "builtin_function",
+        "named": true
+      },
+      {
+        "type": "identifier",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "literal",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "boolean",
+        "named": true
+      },
+      {
+        "type": "number",
+        "named": true
+      },
+      {
+        "type": "string",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "number",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "decimal",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "preprocessor_expression",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "and",
+        "named": true
+      },
+      {
+        "type": "exists",
+        "named": true
+      },
+      {
+        "type": "file_exists",
+        "named": true
+      },
+      {
+        "type": "literal",
+        "named": true
+      },
+      {
+        "type": "not",
+        "named": true
+      },
+      {
+        "type": "or",
+        "named": true
+      },
+      {
+        "type": "variable",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "variable",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "builtin_macros",
+        "named": true
+      },
+      {
+        "type": "builtin_variable",
+        "named": true
+      },
+      {
+        "type": "identifier",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "add",
     "named": true,
     "fields": {
-      "lhs": {
+      "left": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "and",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "comparison",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "in",
-            "named": true
-          },
-          {
-            "type": "negate",
-            "named": true
-          },
-          {
-            "type": "not_in",
-            "named": true
-          },
-          {
-            "type": "or",
-            "named": true
-          },
-          {
-            "type": "parenthesis",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "usage",
+            "type": "expression",
             "named": true
           }
         ]
       },
-      "rhs": {
+      "operator": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "and",
-            "named": true
-          },
+            "type": "+",
+            "named": false
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
           {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "comparison",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "in",
-            "named": true
-          },
-          {
-            "type": "negate",
-            "named": true
-          },
-          {
-            "type": "not_in",
-            "named": true
-          },
-          {
-            "type": "or",
-            "named": true
-          },
-          {
-            "type": "parenthesis",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "usage",
+            "type": "expression",
             "named": true
           }
         ]
@@ -106,73 +216,47 @@
     }
   },
   {
-    "type": "and_directive",
+    "type": "and",
     "named": true,
     "fields": {
-      "lhs": {
+      "left": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "and_directive",
+            "type": "expression",
             "named": true
           },
           {
-            "type": "builtin_macros",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "file_exists",
-            "named": true
-          },
-          {
-            "type": "negate_directive",
-            "named": true
-          },
-          {
-            "type": "or_directive",
-            "named": true
-          },
-          {
-            "type": "user_macros",
+            "type": "preprocessor_expression",
             "named": true
           }
         ]
       },
-      "rhs": {
+      "operator": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "&&",
+            "named": false
+          },
+          {
+            "type": "and",
+            "named": false
+          }
+        ]
+      },
+      "right": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "and_directive",
+            "type": "expression",
             "named": true
           },
           {
-            "type": "builtin_macros",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "file_exists",
-            "named": true
-          },
-          {
-            "type": "negate_directive",
-            "named": true
-          },
-          {
-            "type": "or_directive",
-            "named": true
-          },
-          {
-            "type": "user_macros",
+            "type": "preprocessor_expression",
             "named": true
           }
         ]
@@ -188,99 +272,7 @@
       "required": false,
       "types": [
         {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "assignment",
-          "named": true
-        },
-        {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "concatenation",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "define",
-          "named": true
-        },
-        {
-          "type": "error",
-          "named": true
-        },
-        {
-          "type": "for_each",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "function_definition",
-          "named": true
-        },
-        {
-          "type": "if",
-          "named": true
-        },
-        {
-          "type": "if_directive",
-          "named": true
-        },
-        {
-          "type": "import",
-          "named": true
-        },
-        {
-          "type": "include",
-          "named": true
-        },
-        {
-          "type": "once",
-          "named": true
-        },
-        {
-          "type": "print",
-          "named": true
-        },
-        {
-          "type": "propagation",
-          "named": true
-        },
-        {
-          "type": "settings",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "struct",
-          "named": true
-        },
-        {
-          "type": "subtraction",
-          "named": true
-        },
-        {
-          "type": "undef",
-          "named": true
-        },
-        {
-          "type": "usage",
-          "named": true
-        },
-        {
-          "type": "using",
+          "type": "expression",
           "named": true
         }
       ]
@@ -295,256 +287,42 @@
       "required": false,
       "types": [
         {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "assignment",
-          "named": true
-        },
-        {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "concatenation",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "define",
-          "named": true
-        },
-        {
-          "type": "error",
-          "named": true
-        },
-        {
-          "type": "for_each",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "function_definition",
-          "named": true
-        },
-        {
-          "type": "if",
-          "named": true
-        },
-        {
-          "type": "if_directive",
-          "named": true
-        },
-        {
-          "type": "import",
-          "named": true
-        },
-        {
-          "type": "include",
-          "named": true
-        },
-        {
-          "type": "once",
-          "named": true
-        },
-        {
-          "type": "print",
-          "named": true
-        },
-        {
-          "type": "propagation",
-          "named": true
-        },
-        {
-          "type": "settings",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "struct",
-          "named": true
-        },
-        {
-          "type": "subtraction",
-          "named": true
-        },
-        {
-          "type": "undef",
-          "named": true
-        },
-        {
-          "type": "usage",
-          "named": true
-        },
-        {
-          "type": "using",
+          "type": "expression",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "assignment",
+    "type": "assign",
     "named": true,
     "fields": {
-      "lhs": {
+      "left": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "assignment",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "concatenation",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "error",
-            "named": true
-          },
-          {
-            "type": "for_each",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "function_definition",
-            "named": true
-          },
-          {
-            "type": "if",
-            "named": true
-          },
-          {
-            "type": "print",
-            "named": true
-          },
-          {
-            "type": "propagation",
-            "named": true
-          },
-          {
-            "type": "settings",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "struct",
-            "named": true
-          },
-          {
-            "type": "subtraction",
-            "named": true
-          },
-          {
-            "type": "usage",
-            "named": true
-          },
-          {
-            "type": "using",
+            "type": "expression",
             "named": true
           }
         ]
       },
-      "rhs": {
+      "operator": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "array",
-            "named": true
-          },
+            "type": "=",
+            "named": false
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
           {
-            "type": "assignment",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "concatenation",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "error",
-            "named": true
-          },
-          {
-            "type": "for_each",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "function_definition",
-            "named": true
-          },
-          {
-            "type": "if",
-            "named": true
-          },
-          {
-            "type": "print",
-            "named": true
-          },
-          {
-            "type": "settings",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "struct",
-            "named": true
-          },
-          {
-            "type": "subtraction",
-            "named": true
-          },
-          {
-            "type": "usage",
-            "named": true
-          },
-          {
-            "type": "using",
+            "type": "expression",
             "named": true
           }
         ]
@@ -572,55 +350,15 @@
     "fields": {}
   },
   {
-    "type": "comparison",
+    "type": "compare",
     "named": true,
     "fields": {
-      "lhs": {
+      "left": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "and",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "comparison",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "in",
-            "named": true
-          },
-          {
-            "type": "negate",
-            "named": true
-          },
-          {
-            "type": "not_in",
-            "named": true
-          },
-          {
-            "type": "or",
-            "named": true
-          },
-          {
-            "type": "parenthesis",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "usage",
+            "type": "expression",
             "named": true
           }
         ]
@@ -655,233 +393,16 @@
           }
         ]
       },
-      "rhs": {
+      "right": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "and",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "comparison",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "in",
-            "named": true
-          },
-          {
-            "type": "negate",
-            "named": true
-          },
-          {
-            "type": "not_in",
-            "named": true
-          },
-          {
-            "type": "or",
-            "named": true
-          },
-          {
-            "type": "parenthesis",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "usage",
+            "type": "expression",
             "named": true
           }
         ]
       }
-    }
-  },
-  {
-    "type": "concatenation",
-    "named": true,
-    "fields": {
-      "lhs": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "assignment",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "concatenation",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "error",
-            "named": true
-          },
-          {
-            "type": "for_each",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "function_definition",
-            "named": true
-          },
-          {
-            "type": "if",
-            "named": true
-          },
-          {
-            "type": "print",
-            "named": true
-          },
-          {
-            "type": "propagation",
-            "named": true
-          },
-          {
-            "type": "settings",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "struct",
-            "named": true
-          },
-          {
-            "type": "subtraction",
-            "named": true
-          },
-          {
-            "type": "usage",
-            "named": true
-          },
-          {
-            "type": "using",
-            "named": true
-          }
-        ]
-      },
-      "rhs": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "assignment",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "concatenation",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "error",
-            "named": true
-          },
-          {
-            "type": "for_each",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "function_definition",
-            "named": true
-          },
-          {
-            "type": "if",
-            "named": true
-          },
-          {
-            "type": "print",
-            "named": true
-          },
-          {
-            "type": "settings",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "struct",
-            "named": true
-          },
-          {
-            "type": "subtraction",
-            "named": true
-          },
-          {
-            "type": "usage",
-            "named": true
-          },
-          {
-            "type": "using",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "define",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "builtin_macros",
-          "named": true
-        },
-        {
-          "type": "user_macros",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -897,22 +418,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "error",
-    "named": true,
-    "fields": {
-      "message": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -946,32 +451,6 @@
     }
   },
   {
-    "type": "for_each",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          }
-        ]
-      },
-      "iterator": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "in",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "function_call",
     "named": true,
     "fields": {
@@ -1000,11 +479,7 @@
         "required": true,
         "types": [
           {
-            "type": "builtin_function",
-            "named": true
-          },
-          {
-            "type": "user_function",
+            "type": "function",
             "named": true
           }
         ]
@@ -1040,7 +515,7 @@
         "required": true,
         "types": [
           {
-            "type": "user_function",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -1051,390 +526,62 @@
     "type": "if",
     "named": true,
     "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          }
-        ]
-      },
       "condition": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "and",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "comparison",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "in",
-            "named": true
-          },
-          {
-            "type": "negate",
-            "named": true
-          },
-          {
-            "type": "not_in",
-            "named": true
-          },
-          {
-            "type": "or",
-            "named": true
-          },
-          {
-            "type": "parenthesis",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "usage",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "if_directive",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "assignment",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "concatenation",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "define",
-            "named": true
-          },
-          {
-            "type": "error",
-            "named": true
-          },
-          {
-            "type": "for_each",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "function_definition",
-            "named": true
-          },
-          {
-            "type": "if",
-            "named": true
-          },
-          {
-            "type": "if_directive",
-            "named": true
-          },
-          {
-            "type": "import",
-            "named": true
-          },
-          {
-            "type": "include",
-            "named": true
-          },
-          {
-            "type": "once",
-            "named": true
-          },
-          {
-            "type": "print",
-            "named": true
-          },
-          {
-            "type": "propagation",
-            "named": true
-          },
-          {
-            "type": "settings",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "struct",
-            "named": true
-          },
-          {
-            "type": "subtraction",
-            "named": true
-          },
-          {
-            "type": "undef",
-            "named": true
-          },
-          {
-            "type": "usage",
-            "named": true
-          },
-          {
-            "type": "using",
+            "type": "expression",
             "named": true
           }
         ]
       },
-      "condition": {
+      "consequence": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "and_directive",
-            "named": true
-          },
-          {
-            "type": "builtin_macros",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "file_exists",
-            "named": true
-          },
-          {
-            "type": "negate_directive",
-            "named": true
-          },
-          {
-            "type": "or_directive",
-            "named": true
-          },
-          {
-            "type": "user_macros",
-            "named": true
-          }
-        ]
-      },
-      "else": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
             "type": "array",
-            "named": true
-          },
-          {
-            "type": "assignment",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "concatenation",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "define",
-            "named": true
-          },
-          {
-            "type": "error",
-            "named": true
-          },
-          {
-            "type": "for_each",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "function_definition",
-            "named": true
-          },
-          {
-            "type": "if",
-            "named": true
-          },
-          {
-            "type": "if_directive",
-            "named": true
-          },
-          {
-            "type": "import",
-            "named": true
-          },
-          {
-            "type": "include",
-            "named": true
-          },
-          {
-            "type": "once",
-            "named": true
-          },
-          {
-            "type": "print",
-            "named": true
-          },
-          {
-            "type": "propagation",
-            "named": true
-          },
-          {
-            "type": "settings",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "struct",
-            "named": true
-          },
-          {
-            "type": "subtraction",
-            "named": true
-          },
-          {
-            "type": "undef",
-            "named": true
-          },
-          {
-            "type": "usage",
-            "named": true
-          },
-          {
-            "type": "using",
             "named": true
           }
         ]
       }
-    }
-  },
-  {
-    "type": "import",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "environment_variable",
-          "named": true
-        }
-      ]
     }
   },
   {
     "type": "in",
     "named": true,
     "fields": {
-      "lhs": {
+      "left": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "usage",
+            "type": "expression",
             "named": true
           }
         ]
       },
-      "rhs": {
+      "operator": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "boolean",
-            "named": true
-          },
+            "type": "in",
+            "named": false
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
           {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "usage",
+            "type": "expression",
             "named": true
           }
         ]
       }
-    }
-  },
-  {
-    "type": "include",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "filename",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1453,7 +600,7 @@
     }
   },
   {
-    "type": "negate",
+    "type": "not",
     "named": true,
     "fields": {},
     "children": {
@@ -1461,86 +608,11 @@
       "required": true,
       "types": [
         {
-          "type": "and",
+          "type": "expression",
           "named": true
         },
         {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "comparison",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "in",
-          "named": true
-        },
-        {
-          "type": "negate",
-          "named": true
-        },
-        {
-          "type": "not_in",
-          "named": true
-        },
-        {
-          "type": "or",
-          "named": true
-        },
-        {
-          "type": "parenthesis",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "usage",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "negate_directive",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "and_directive",
-          "named": true
-        },
-        {
-          "type": "builtin_macros",
-          "named": true
-        },
-        {
-          "type": "exists",
-          "named": true
-        },
-        {
-          "type": "file_exists",
-          "named": true
-        },
-        {
-          "type": "negate_directive",
-          "named": true
-        },
-        {
-          "type": "or_directive",
-          "named": true
-        },
-        {
-          "type": "user_macros",
+          "type": "preprocessor_expression",
           "named": true
         }
       ]
@@ -1550,231 +622,80 @@
     "type": "not_in",
     "named": true,
     "fields": {
-      "lhs": {
+      "left": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "usage",
+            "type": "expression",
             "named": true
           }
         ]
       },
-      "rhs": {
+      "operator": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "not in",
+            "named": false
+          }
+        ]
+      },
+      "right": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "usage",
+            "type": "expression",
             "named": true
           }
         ]
       }
     }
-  },
-  {
-    "type": "once",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "or",
     "named": true,
     "fields": {
-      "lhs": {
+      "left": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "and",
+            "type": "expression",
             "named": true
           },
           {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "comparison",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "in",
-            "named": true
-          },
-          {
-            "type": "negate",
-            "named": true
-          },
-          {
-            "type": "not_in",
-            "named": true
-          },
-          {
-            "type": "or",
-            "named": true
-          },
-          {
-            "type": "parenthesis",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "usage",
+            "type": "preprocessor_expression",
             "named": true
           }
         ]
       },
-      "rhs": {
+      "operator": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "and",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "comparison",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "in",
-            "named": true
-          },
-          {
-            "type": "negate",
-            "named": true
-          },
-          {
-            "type": "not_in",
-            "named": true
-          },
           {
             "type": "or",
-            "named": true
+            "named": false
           },
           {
-            "type": "parenthesis",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "usage",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "or_directive",
-    "named": true,
-    "fields": {
-      "lhs": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "and_directive",
-            "named": true
-          },
-          {
-            "type": "builtin_macros",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "file_exists",
-            "named": true
-          },
-          {
-            "type": "negate_directive",
-            "named": true
-          },
-          {
-            "type": "or_directive",
-            "named": true
-          },
-          {
-            "type": "user_macros",
-            "named": true
+            "type": "||",
+            "named": false
           }
         ]
       },
-      "rhs": {
+      "right": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "and_directive",
+            "type": "expression",
             "named": true
           },
           {
-            "type": "builtin_macros",
-            "named": true
-          },
-          {
-            "type": "exists",
-            "named": true
-          },
-          {
-            "type": "file_exists",
-            "named": true
-          },
-          {
-            "type": "negate_directive",
-            "named": true
-          },
-          {
-            "type": "or_directive",
-            "named": true
-          },
-          {
-            "type": "user_macros",
+            "type": "preprocessor_expression",
             "named": true
           }
         ]
@@ -1790,47 +711,7 @@
       "required": true,
       "types": [
         {
-          "type": "and",
-          "named": true
-        },
-        {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "comparison",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "in",
-          "named": true
-        },
-        {
-          "type": "negate",
-          "named": true
-        },
-        {
-          "type": "not_in",
-          "named": true
-        },
-        {
-          "type": "or",
-          "named": true
-        },
-        {
-          "type": "parenthesis",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "usage",
+          "type": "expression",
           "named": true
         }
       ]
@@ -1853,15 +734,30 @@
     }
   },
   {
-    "type": "print",
+    "type": "preprocessor_define",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "preprocessor_if",
     "named": true,
     "fields": {
-      "message": {
+      "condition": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "string",
+            "type": "preprocessor_expression",
             "named": true
           }
         ]
@@ -1869,7 +765,52 @@
     }
   },
   {
-    "type": "propagation",
+    "type": "preprocessor_import",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "environment_variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "preprocessor_include",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "filename",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "preprocessor_undef",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "promotion",
     "named": true,
     "fields": {},
     "children": {
@@ -1888,22 +829,6 @@
     }
   },
   {
-    "type": "settings",
-    "named": true,
-    "fields": {
-      "settings": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -1912,99 +837,7 @@
       "required": false,
       "types": [
         {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "assignment",
-          "named": true
-        },
-        {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "concatenation",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "define",
-          "named": true
-        },
-        {
-          "type": "error",
-          "named": true
-        },
-        {
-          "type": "for_each",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "function_definition",
-          "named": true
-        },
-        {
-          "type": "if",
-          "named": true
-        },
-        {
-          "type": "if_directive",
-          "named": true
-        },
-        {
-          "type": "import",
-          "named": true
-        },
-        {
-          "type": "include",
-          "named": true
-        },
-        {
-          "type": "once",
-          "named": true
-        },
-        {
-          "type": "print",
-          "named": true
-        },
-        {
-          "type": "propagation",
-          "named": true
-        },
-        {
-          "type": "settings",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "struct",
-          "named": true
-        },
-        {
-          "type": "subtraction",
-          "named": true
-        },
-        {
-          "type": "undef",
-          "named": true
-        },
-        {
-          "type": "usage",
-          "named": true
-        },
-        {
-          "type": "using",
+          "type": "expression",
           "named": true
         }
       ]
@@ -2050,279 +883,46 @@
       "required": false,
       "types": [
         {
-          "type": "array",
-          "named": true
-        },
-        {
-          "type": "assignment",
-          "named": true
-        },
-        {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "concatenation",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "define",
-          "named": true
-        },
-        {
-          "type": "error",
-          "named": true
-        },
-        {
-          "type": "for_each",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "function_definition",
-          "named": true
-        },
-        {
-          "type": "if",
-          "named": true
-        },
-        {
-          "type": "if_directive",
-          "named": true
-        },
-        {
-          "type": "import",
-          "named": true
-        },
-        {
-          "type": "include",
-          "named": true
-        },
-        {
-          "type": "once",
-          "named": true
-        },
-        {
-          "type": "print",
-          "named": true
-        },
-        {
-          "type": "propagation",
-          "named": true
-        },
-        {
-          "type": "settings",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "struct",
-          "named": true
-        },
-        {
-          "type": "subtraction",
-          "named": true
-        },
-        {
-          "type": "undef",
-          "named": true
-        },
-        {
-          "type": "usage",
-          "named": true
-        },
-        {
-          "type": "using",
+          "type": "expression",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "subtraction",
+    "type": "sub",
     "named": true,
     "fields": {
-      "lhs": {
+      "left": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "array",
-            "named": true
-          },
-          {
-            "type": "assignment",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "concatenation",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "error",
-            "named": true
-          },
-          {
-            "type": "for_each",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "function_definition",
-            "named": true
-          },
-          {
-            "type": "if",
-            "named": true
-          },
-          {
-            "type": "print",
-            "named": true
-          },
-          {
-            "type": "propagation",
-            "named": true
-          },
-          {
-            "type": "settings",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "struct",
-            "named": true
-          },
-          {
-            "type": "subtraction",
-            "named": true
-          },
-          {
-            "type": "usage",
-            "named": true
-          },
-          {
-            "type": "using",
+            "type": "expression",
             "named": true
           }
         ]
       },
-      "rhs": {
+      "operator": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "array",
-            "named": true
-          },
+            "type": "-",
+            "named": false
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
           {
-            "type": "assignment",
-            "named": true
-          },
-          {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "concatenation",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "error",
-            "named": true
-          },
-          {
-            "type": "for_each",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "function_definition",
-            "named": true
-          },
-          {
-            "type": "if",
-            "named": true
-          },
-          {
-            "type": "print",
-            "named": true
-          },
-          {
-            "type": "settings",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "struct",
-            "named": true
-          },
-          {
-            "type": "subtraction",
-            "named": true
-          },
-          {
-            "type": "usage",
-            "named": true
-          },
-          {
-            "type": "using",
+            "type": "expression",
             "named": true
           }
         ]
       }
-    }
-  },
-  {
-    "type": "undef",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "builtin_macros",
-          "named": true
-        },
-        {
-          "type": "user_macros",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2345,71 +945,6 @@
     }
   },
   {
-    "type": "user_function",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "user_macros",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "using",
-    "named": true,
-    "fields": {
-      "struct": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "usage",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "variable",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "builtin_variable",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "!",
     "named": false
   },
@@ -2422,35 +957,7 @@
     "named": false
   },
   {
-    "type": "#define",
-    "named": false
-  },
-  {
-    "type": "#else",
-    "named": false
-  },
-  {
-    "type": "#endif",
-    "named": false
-  },
-  {
-    "type": "#if",
-    "named": false
-  },
-  {
-    "type": "#import",
-    "named": false
-  },
-  {
-    "type": "#include",
-    "named": false
-  },
-  {
-    "type": "#once",
-    "named": false
-  },
-  {
-    "type": "#undef",
+    "type": "#",
     "named": false
   },
   {
@@ -2670,6 +1177,10 @@
     "named": true
   },
   {
+    "type": "define",
+    "named": false
+  },
+  {
     "type": "double_quoted",
     "named": true
   },
@@ -2702,12 +1213,20 @@
     "named": true
   },
   {
+    "type": "if",
+    "named": false
+  },
+  {
+    "type": "import",
+    "named": false
+  },
+  {
     "type": "in",
     "named": false
   },
   {
-    "type": "newline",
-    "named": true
+    "type": "include",
+    "named": false
   },
   {
     "type": "not",
@@ -2722,11 +1241,27 @@
     "named": false
   },
   {
+    "type": "preprocessor_else",
+    "named": true
+  },
+  {
+    "type": "preprocessor_endif",
+    "named": true
+  },
+  {
+    "type": "preprocessor_once",
+    "named": true
+  },
+  {
     "type": "single_quoted",
     "named": true
   },
   {
     "type": "true",
+    "named": false
+  },
+  {
+    "type": "undef",
     "named": false
   },
   {
