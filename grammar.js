@@ -145,6 +145,7 @@ module.exports = grammar({
 			$.user_macros,
 		),
 		user_macros: $ => $.identifier,
+		function: $ => choice($.builtin_function, $.user_function),
 
 		body: $ => prec(precedence.top_level, repeat1(choice(
 			$.preprocessor_simple,
@@ -193,7 +194,7 @@ module.exports = grammar({
 		arguments: $ => seq('(', optional($.body), ')'),
 
 		function_call: $ => prec.right(precedence.function_call, seq(
-			field('name', choice($.builtin_function, $.user_function)),
+			field('name', $.function),
 			field('arguments', $.arguments),
 			optional(field('body', $.array)),
 		)),
