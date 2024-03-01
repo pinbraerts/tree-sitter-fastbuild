@@ -44,13 +44,22 @@ module.exports = grammar({
 		source_file: $ => repeat($.expression),
 		_separator:        _ => ',',
 		_whitespace:       _ => token(/[\s\u00A0\uFEFF\u3000]+/),                       
-		comment:           _ => token(/\/\/.*|;.*/),                    
+		// http://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
+		comment: _ => token(choice(
+			seq(';',  /(\\+(.|\r?\n)|[^\\\n])*/),
+			seq('//', /(\\+(.|\r?\n)|[^\\\n])*/),
+			seq(
+				'/*',
+				/[^*]*\*+([^/*][^*]*\*+)*/,
+				'/',
+			),
+		)),
 		_newline:          _ => token(/\r?\n/),                         
 		decimal:           _ => token(/[\d_]+/), 
 		filename:          _ => token(/"[\/\.\w\- ]+"/),
 		identifier:        _ => token(/[a-zA-Z_][\w_]*/),               
-		single_quoted:     _ => token.immediate(/[^^$%']+?/),           
-		double_quoted:     _ => token.immediate(/[^^$%"]+?/),           
+		single_quoted:     _ => token.immediate(prec(1, /[^^$%']+?/)),           
+		double_quoted:     _ => token.immediate(prec(1, /[^^$%"]+?/)),           
 		escape_sequence:   _ => token.immediate(/\^./),                 
 		string: $ => choice(
 			seq("'", repeat($._single_inner), "'"),
@@ -69,7 +78,9 @@ module.exports = grammar({
 			$.escape_sequence,
 		),
 		interpolation: $ => seq(token.immediate('$'), $.identifier, '$'),
-		placeholder:   $ => seq(token.immediate('%'), field('number', $.decimal)),
+		placeholder:   $ => seq(token.immediate('%'),
+			choice(field('number', $.decimal), '@', '*'),
+		),
 
 		_preprocessor: $ => seq('#', choice(
 			$.preprocessor_define,
