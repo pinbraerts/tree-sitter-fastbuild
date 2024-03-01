@@ -30,7 +30,7 @@ module.exports = grammar({
 		$.condition,
 		$.primary,
 		$.control_flow,
-		$.directive,
+		$.preprocessor_simple,
 		$.expression,
 		$.statement,
 		$.number,
@@ -38,8 +38,8 @@ module.exports = grammar({
 
 	inline: $ => [
 		$.reference,
-		$.else_directive,
-		$.condition_directive,
+		$.preprocessor_else,
+		$.preprocessor_condition,
 		$.macros,
 		$.body,
 	],
@@ -72,48 +72,48 @@ module.exports = grammar({
 		placeholder: $ => seq(token.immediate('%'), field('number', $.number)),
 		environment_variable: $ => $.identifier,
 
-		directive: $ => choice(
-			$.define,
-			$.undef,
-			$.if_directive,
-			$.import,
-			$.include,
-			$.once,
+		preprocessor_simple: $ => choice(
+			$.preprocessor_define,
+			$.preprocessor_undef,
+			$.preprocessor_if,
+			$.preprocessor_import,
+			$.preprocessor_include,
+			$.preprocessor_once,
 		),
-		define: $ => seq(
+		preprocessor_define: $ => seq(
 			preprocessor('#define'),
 			$.macros,
 		),
-		undef: $ => seq(
+		preprocessor_undef: $ => seq(
 			preprocessor('#undef'),
 			$.macros,
 		),
-		if_directive: $ => seq(
+		preprocessor_if: $ => seq(
 			preprocessor('#if'),
-			field('condition', $.condition_directive),
+			field('condition', $.preprocessor_condition),
 			optional(field('body', $.body)),
-			optional($.else_directive),
+			optional($.preprocessor_else),
 			preprocessor('#endif'),
 		),
-		else_directive: $ => seq(
+		preprocessor_else: $ => seq(
 			preprocessor('#else'),
 			optional(field('else', $.body)),
 		),
-		import: $ => seq(
+		preprocessor_import: $ => seq(
 			preprocessor('#import'),
 			$.environment_variable,
 		),
-		include: $ => seq(
+		preprocessor_include: $ => seq(
 			preprocessor('#include'),
 			$.filename,
 		),
-		once: $ => preprocessor('#once'),
-		condition_directive: $ => choice(
+		preprocessor_once: $ => preprocessor('#once'),
+		preprocessor_condition: $ => choice(
 			$.exists,
 			$.file_exists,
-			$.or_directive,
-			$.and_directive,
-			$.negate_directive,
+			$.preprocessor_or,
+			$.preprocessor_and,
+			$.preprocessor_negate,
 			$.macros,
 		),
 		exists: $ => seq(
@@ -122,18 +122,18 @@ module.exports = grammar({
 		file_exists: $ => seq(
 			'file_exists', '(', $.filename, ')',
 		),
-		or_directive: $ => prec.left(precedence.or, seq(
-			field('lhs', $.condition_directive),
+		preprocessor_or: $ => prec.left(precedence.or, seq(
+			field('lhs', $.preprocessor_condition),
 			choice('or', '||'),
-			field('rhs', $.condition_directive),
+			field('rhs', $.preprocessor_condition),
 		)),
-		and_directive: $ => prec.left(precedence.and, seq(
-			field('lhs', $.condition_directive),
+		preprocessor_and: $ => prec.left(precedence.and, seq(
+			field('lhs', $.preprocessor_condition),
 			choice('and', '&&'),
-			field('rhs', $.condition_directive),
+			field('rhs', $.preprocessor_condition),
 		)),
-		negate_directive: $ => prec(precedence.negate, seq(
-			'!', $.condition_directive
+		preprocessor_negate: $ => prec(precedence.negate, seq(
+			'!', $.preprocessor_condition
 		)),
 		macros: $ => choice(
 			$.builtin_macros,
@@ -150,7 +150,7 @@ module.exports = grammar({
 
 		_separator: _ => ',',
 		body: $ => prec(precedence.top_level, repeat1(choice(
-			$.directive,
+			$.preprocessor_simple,
 			$.statement,
 			$._separator,
 		))),
