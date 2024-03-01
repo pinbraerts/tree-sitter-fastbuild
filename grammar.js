@@ -1,13 +1,13 @@
 let precedence = {
-	top_level: 0,
-	or: 1,
-	and: 2,
-	concat: 3,
-	subtract: 3,
-	assign: 4,
+	add: 1,
+	sub: 1,
+	assign: 2,
+	or: 3,
+	and: 4,
 	compare: 5,
-	negate: 6,
-	in: 7,
+	in: 6,
+	not_in: 6,
+	not: 7,
 	function_call: 8,
 }
 
@@ -17,19 +17,16 @@ module.exports = grammar({
 	extras: $ => [
 		$.comment,
 		$._whitespace,
-		$.newline,
+		$._separator,
+		$._newline,
 		$._preprocessor,
 	],
 
 	word: $ => $.identifier,
 
 	supertypes: $ => [
-		$.condition,
-		$.primary,
-		$.control_flow,
-		$.preprocessor_simple,
+		$.literal,
 		$.expression,
-		$.statement,
 		$.number,
 		$.variable,
 		$.function,
@@ -44,13 +41,12 @@ module.exports = grammar({
 	],
 
 	rules: {
-		source_file: $ => optional($.body),
+		source_file: $ => repeat($.expression),
 		_separator:        _ => ',',
 		_whitespace:       _ => token(/[\s\t]+/),                       
 		comment:           _ => token(/\/\/.*|;.*/),                    
-		newline:           _ => token(/\r?\n/),                         
-		macros_definition: _ => token(/.+/),                            
-		decimal:           _ => token(/\d[\d_]*(\.[\d_]*)?(e[\d_]+)?/), 
+		_newline:          _ => token(/\r?\n/),                         
+		decimal:           _ => token(/[\d_]+/), 
 		filename:          _ => token(/"[\/\.\w\- ]+"/),
 		identifier:        _ => token(/[a-zA-Z_][\w_]*/),               
 		single_quoted:     _ => token.immediate(/[^^$%']+?/),           
@@ -122,47 +118,10 @@ module.exports = grammar({
 		usage: $ => seq('.', choice($.variable, $.string)),
 		promotion: $ => seq('^', choice($.variable, $.string)),
 
-		body: $ => prec(precedence.top_level, repeat1(choice(
-			$.preprocessor_simple,
-			$.statement,
-			$._separator,
-		))),
-
-		statement: $ => choice(
-			$.primary,
-			$.compound,
-			$.array,
-			$.function_call,
-			$.function_definition,
-			$.control_flow,
-		),
-		expression: $ => choice(
-			$.array,
-			$.struct,
-			$.primary,
-		),
-		compound: $ => seq(
-			field('reference', $.reference),
-			choice($._assignment, $._operator),
-			repeat($._operator),
-		),
-		_operator: $ => choice(
-			$._concatenation,
-			$._subtraction,
-		),
-		_assignment:    $ => seq('=', field('assign', $.expression)),
-		_concatenation: $ => seq('+', field('concat', $.expression)),
-		_subtraction:   $ => seq('-', field('subtract', $.expression)),
-		boolean: _ => choice(
-			'true', 'false'
-		),
-		number: $ => choice(
-			$.decimal,
-		),
-
-		array: $ => seq('{', optional($.body), '}'),
-		struct: $ => seq('[', optional($.body), ']'),
-		arguments: $ => seq('(', optional($.body), ')'),
+		array: $ => seq('{', repeat($.expression), '}'),
+		struct: $ => seq('[', repeat($.expression), ']'),
+		arguments: $ => seq('(', repeat($.expression), ')'),
+		parenthesis: $ => seq('(', $.expression, ')'),
 
 		function_call: $ => prec.right(precedence.function_call, seq(
 			field('name', $.function),
@@ -177,56 +136,60 @@ module.exports = grammar({
 			field('body', $.array),
 		),
 
-		control_flow: $ => choice(
-			$.for_each,
-			$.if,
-			$.error,
-			$.print,
-			$.using,
-			$.settings,
-		),
-
-		condition: $ => choice(
-			$.primary,
-			$.comparison,
+		expression: $ => choice(
+			$.literal,
+			$.usage,
+			$.promotion,
+			$.array,
+			$.struct,
+			$.parenthesis,
+			$.not,
 			$.and,
 			$.or,
-			$.negate,
+			$.add,
+			$.sub,
+			$.assign,
 			$.in,
+			$.compare,
 			$.not_in,
-			$.parenthesis,
+			$.function_call,
+			$.function_definition,
+			$.exists,
+			$.file_exists,
+			$.if,
 		),
-		parenthesis: $ => seq('(', $.condition, ')'),
-		comparison: $ => prec.left(precedence.compare, seq(
-			field('lhs', $.condition),
-			field('operator', choice('==', '!=', '<', '<=', '>', '>=')),
-			field('rhs', $.condition),
-		)),
-		and: $ => prec.left(precedence.and, seq(
-			field('lhs', $.condition),
-			choice('and', '&&'),
-			field('rhs', $.condition),
-		)),
-		or: $ => prec.left(precedence.or, seq(
-			field('lhs', $.condition),
-			choice('or', '||'),
-			field('rhs', $.condition),
-		)),
-		negate: $ => prec(precedence.negate, seq(
-			choice('not', '!'), $.condition,
-		)),
-		in: $ => prec.left(precedence.in, seq(
-			field('lhs', $.primary),
-			'in',
-			field('rhs', $.primary),
-		)),
-		not_in: $ => prec.left(precedence.in, seq(
-			field('lhs', $.primary),
-			alias(seq('not', 'in'), 'not in'),
-			field('rhs', $.primary),
-		)),
-		primary: $ => choice(
-			$.usage,
+
+		not: $ => prec.right(precedence.not, seq(choice('not', '!'), $.expression)),
+
+		...[
+			['and', choice('&&', 'and'), precedence.and],
+			['or', choice('||', 'or'), precedence.or],
+			['add', '+', precedence.add],
+			['sub', '-', precedence.sub],
+			['compare', choice('==', '!=', '>', '<', '>=', '<='), precedence.add],
+		].reduce((result, [name, operator, precedence]) => {
+			result[name] = $ => prec.left(precedence, seq(
+				field('left', $.expression),
+				field('operator', operator),
+				field('right', $.expression),
+			))
+			return result
+		}, {}),
+
+		...[
+			['in', 'in', precedence.in],
+			['not_in', alias(seq('not', 'in'), 'not in'), precedence.not_in],
+			['assign', '=', precedence.assign],
+		].reduce((result, [name, operator, precedence]) => {
+			result[name] = $ => prec.right(precedence, seq(
+				field('left', $.expression),
+				field('operator', operator),
+				field('right', $.expression),
+			))
+			return result
+		}, {}),
+
+		literal: $ => choice(
 			$.string,
 			$.number,
 			$.boolean,
@@ -235,7 +198,7 @@ module.exports = grammar({
 
 		if: $ => seq(
 			'If', '(',
-			field('condition', $.condition),
+			field('condition', $.expression),
 			')',
 			field('body', $.array),
 		),
