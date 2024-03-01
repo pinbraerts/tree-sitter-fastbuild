@@ -143,13 +143,8 @@ module.exports = grammar({
 		)),
 
 		environment_variable: $ => $.identifier,
-		user_macros: $ => $.identifier,
-		user_function: $ => $.identifier,
-		user_variable: $ => $.identifier,
-		variable: $ => choice($.builtin_variable, $.user_variable),
-		macros: $ => choice($.builtin_macros, $.user_macros),
-		function: $ => choice($.builtin_function, $.user_function),
-		reference: $ => choice($.usage, $.promotion),
+		variable: $ => choice($.builtin_variable, $.identifier, $.builtin_macros),
+		function: $ => choice($.builtin_function, $.identifier),
 		usage: $ => seq('.', choice($.variable, $.string)),
 		promotion: $ => seq('^', choice($.variable, $.string)),
 
@@ -203,7 +198,7 @@ module.exports = grammar({
 
 		function_definition: $ => seq(
 			'function',
-			field('name', $.user_function),
+			field('name', $.identifier),
 			field('arguments', $.arguments),
 			field('body', $.array),
 		),
