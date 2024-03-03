@@ -26,30 +26,12 @@
         "type": "CHOICE",
         "members": [
           {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ";"
-              },
-              {
-                "type": "PATTERN",
-                "value": "(\\\\+(.|\\r?\\n)|[^\\\\\\n])*"
-              }
-            ]
+            "type": "PATTERN",
+            "value": ";(.|\\r?\\n;)*"
           },
           {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "//"
-              },
-              {
-                "type": "PATTERN",
-                "value": "(\\\\+(.|\\r?\\n)|[^\\\\\\n])*"
-              }
-            ]
+            "type": "PATTERN",
+            "value": "\\/\\/(.|\\r?\\n\\/\\/)*"
           },
           {
             "type": "SEQ",
@@ -527,34 +509,12 @@
       "name": "identifier"
     },
     "variable": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "builtin_variable"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "builtin_macros"
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "identifier"
     },
     "function": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "builtin_function"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "identifier"
     },
     "usage": {
       "type": "SEQ",
@@ -1258,149 +1218,6 @@
         {
           "type": "STRING",
           "value": "false"
-        }
-      ]
-    },
-    "builtin_function": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "Alias"
-        },
-        {
-          "type": "STRING",
-          "value": "Compiler"
-        },
-        {
-          "type": "STRING",
-          "value": "Copy"
-        },
-        {
-          "type": "STRING",
-          "value": "CopyDir"
-        },
-        {
-          "type": "STRING",
-          "value": "CSAssembly"
-        },
-        {
-          "type": "STRING",
-          "value": "DLL"
-        },
-        {
-          "type": "STRING",
-          "value": "Error"
-        },
-        {
-          "type": "STRING",
-          "value": "Exec"
-        },
-        {
-          "type": "STRING",
-          "value": "Executable"
-        },
-        {
-          "type": "STRING",
-          "value": "ForEach"
-        },
-        {
-          "type": "STRING",
-          "value": "Library"
-        },
-        {
-          "type": "STRING",
-          "value": "ListDependencies"
-        },
-        {
-          "type": "STRING",
-          "value": "ObjectList"
-        },
-        {
-          "type": "STRING",
-          "value": "Print"
-        },
-        {
-          "type": "STRING",
-          "value": "RemoveDir"
-        },
-        {
-          "type": "STRING",
-          "value": "Settings"
-        },
-        {
-          "type": "STRING",
-          "value": "Test"
-        },
-        {
-          "type": "STRING",
-          "value": "TextFile"
-        },
-        {
-          "type": "STRING",
-          "value": "Unity"
-        },
-        {
-          "type": "STRING",
-          "value": "Using"
-        },
-        {
-          "type": "STRING",
-          "value": "VCXProject"
-        },
-        {
-          "type": "STRING",
-          "value": "VSProjectExternal"
-        },
-        {
-          "type": "STRING",
-          "value": "VSSolution"
-        },
-        {
-          "type": "STRING",
-          "value": "XCodeProject"
-        }
-      ]
-    },
-    "builtin_variable": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "_CURRENT_BFF_DIR_"
-        },
-        {
-          "type": "STRING",
-          "value": "_FASTBUILD_VERSION_STRING_"
-        },
-        {
-          "type": "STRING",
-          "value": "_FASTBUILD_VERSION_"
-        },
-        {
-          "type": "STRING",
-          "value": "_FASTBUILD_EXE_PATH_"
-        },
-        {
-          "type": "STRING",
-          "value": "_WORKING_DIR_"
-        }
-      ]
-    },
-    "builtin_macros": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "__LINUX__"
-        },
-        {
-          "type": "STRING",
-          "value": "__OSX__"
-        },
-        {
-          "type": "STRING",
-          "value": "__WINDOWS__"
         }
       ]
     },

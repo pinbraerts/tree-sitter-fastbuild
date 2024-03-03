@@ -86,10 +86,6 @@
     "named": true,
     "subtypes": [
       {
-        "type": "builtin_function",
-        "named": true
-      },
-      {
         "type": "identifier",
         "named": true
       }
@@ -161,14 +157,6 @@
     "type": "variable",
     "named": true,
     "subtypes": [
-      {
-        "type": "builtin_macros",
-        "named": true
-      },
-      {
-        "type": "builtin_variable",
-        "named": true
-      },
       {
         "type": "identifier",
         "named": true
@@ -327,21 +315,6 @@
   },
   {
     "type": "boolean",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "builtin_function",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "builtin_macros",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "builtin_variable",
     "named": true,
     "fields": {}
   },
@@ -1006,103 +979,7 @@
     "named": false
   },
   {
-    "type": "Alias",
-    "named": false
-  },
-  {
-    "type": "CSAssembly",
-    "named": false
-  },
-  {
-    "type": "Compiler",
-    "named": false
-  },
-  {
-    "type": "Copy",
-    "named": false
-  },
-  {
-    "type": "CopyDir",
-    "named": false
-  },
-  {
-    "type": "DLL",
-    "named": false
-  },
-  {
-    "type": "Error",
-    "named": false
-  },
-  {
-    "type": "Exec",
-    "named": false
-  },
-  {
-    "type": "Executable",
-    "named": false
-  },
-  {
-    "type": "ForEach",
-    "named": false
-  },
-  {
     "type": "If",
-    "named": false
-  },
-  {
-    "type": "Library",
-    "named": false
-  },
-  {
-    "type": "ListDependencies",
-    "named": false
-  },
-  {
-    "type": "ObjectList",
-    "named": false
-  },
-  {
-    "type": "Print",
-    "named": false
-  },
-  {
-    "type": "RemoveDir",
-    "named": false
-  },
-  {
-    "type": "Settings",
-    "named": false
-  },
-  {
-    "type": "Test",
-    "named": false
-  },
-  {
-    "type": "TextFile",
-    "named": false
-  },
-  {
-    "type": "Unity",
-    "named": false
-  },
-  {
-    "type": "Using",
-    "named": false
-  },
-  {
-    "type": "VCXProject",
-    "named": false
-  },
-  {
-    "type": "VSProjectExternal",
-    "named": false
-  },
-  {
-    "type": "VSSolution",
-    "named": false
-  },
-  {
-    "type": "XCodeProject",
     "named": false
   },
   {
@@ -1115,38 +992,6 @@
   },
   {
     "type": "^",
-    "named": false
-  },
-  {
-    "type": "_CURRENT_BFF_DIR_",
-    "named": false
-  },
-  {
-    "type": "_FASTBUILD_EXE_PATH_",
-    "named": false
-  },
-  {
-    "type": "_FASTBUILD_VERSION_",
-    "named": false
-  },
-  {
-    "type": "_FASTBUILD_VERSION_STRING_",
-    "named": false
-  },
-  {
-    "type": "_WORKING_DIR_",
-    "named": false
-  },
-  {
-    "type": "__LINUX__",
-    "named": false
-  },
-  {
-    "type": "__OSX__",
-    "named": false
-  },
-  {
-    "type": "__WINDOWS__",
     "named": false
   },
   {

@@ -1,7 +1,7 @@
 {
   "targets": [
     {
-      "target_name": "tree_sitter_FASTBuild_binding",
+      "target_name": "tree_sitter_fastbuild_binding",
       "include_dirs": [
         "<!(node -e \"require('nan')\")",
         "src"
