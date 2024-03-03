@@ -124,8 +124,8 @@ module.exports = grammar({
 		)),
 
 		environment_variable: $ => $.identifier,
-		variable: $ => choice($.builtin_variable, $.identifier, $.builtin_macros),
-		function: $ => choice($.builtin_function, $.identifier),
+		variable: $ => $.identifier,
+		function: $ => $.identifier,
 		usage: $ => seq(choice('.', '^'), choice($.variable, $.string)),
 
 		array: $ => seq('{', repeat($.expression), '}'),
@@ -214,48 +214,6 @@ module.exports = grammar({
 
 		number: $ => $.decimal,
 		boolean: _ => choice('true', 'false'),
-
-		builtin_function: _ => choice(
-			"Alias",
-			"Compiler",
-			"Copy",
-			"CopyDir",
-			"CSAssembly",
-			"DLL",
-			"Error",
-			"Exec",
-			"Executable",
-			"ForEach",
-			"Library",
-			"ListDependencies",
-			"ObjectList",
-			"Print",
-			"RemoveDir",
-			"Settings",
-			"Test",
-			"TextFile",
-			"Unity",
-			"Using",
-			"VCXProject",
-			"VSProjectExternal",
-			"VSSolution",
-			"XCodeProject",
-		),
-
-		builtin_variable: _ => choice(
-			"_CURRENT_BFF_DIR_",
-			"_FASTBUILD_VERSION_STRING_",
-			"_FASTBUILD_VERSION_",
-			"_FASTBUILD_EXE_PATH_",
-			"_WORKING_DIR_",
-		),
-
-		builtin_macros: _ => choice(
-			'__LINUX__',
-			'__OSX__',
-			'__WINDOWS__',
-		),
-
 		exists: $ => seq('exists', '(', $.environment_variable, ')'),
 		file_exists: $ => seq('file_exists', '(', $.filename, ')'),
 

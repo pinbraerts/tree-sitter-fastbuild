@@ -20,7 +20,7 @@ function FunctionB( .Arg .Arg2 )
   arguments: (arguments)
   body: (array
    (function_call
-	name: (builtin_function)
+	name: (identifier)
 	arguments: (arguments (string (single_quoted)))
    )
   )
@@ -39,7 +39,7 @@ function FunctionB( .Arg .Arg2 )
     )
     consequence: (array
      (function_call
-	  name: (builtin_function)
+	  name: (identifier)
 	  arguments: (arguments (string (single_quoted)))
 	 )
     )

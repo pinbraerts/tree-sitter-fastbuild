@@ -35,7 +35,7 @@ Library ( "mylib" .identifier )
 -------------
 (source_file
  (function_call
-  name: (builtin_function)
+  name: (identifier)
   arguments: (arguments
    (string (double_quoted))
    (usage (identifier))
