@@ -29,11 +29,12 @@ vim.treesitter.language.register('fastbuild', 'fastbuild')
 ```
 
 ## Features
-[x] Highlighting
-[x] Locals
-[x] [Context](https://github.com/nvim-treesitter/nvim-treesitter-context)
-[ ] [Text Objects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
-[ ] Folds
+- [x] Highlighting
+- [x] Locals
+- [x] [Context](https://github.com/nvim-treesitter/nvim-treesitter-context)
+- [ ] Indentation
+- [ ] [Text Objects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
+- [ ] Folds
 
 ## Links
 - [Syntax](https://fastbuild.org/docs/syntaxguide.html)
