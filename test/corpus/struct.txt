@@ -8,19 +8,19 @@ Struct
 ]
 ------
 (source_file
- (assign
+ (compound
   (usage (identifier))
-  (struct
-   (assign
+  (assign (struct
+   (compound
     (usage (identifier))
-    (string (double_quoted))
+    (assign (string (double_quoted)))
    )
-   (assign
+   (compound
     (usage (identifier))
-    (decimal)
+    (assign (decimal))
    )
   )
- )
+ ))
 )
 
 =============
@@ -33,23 +33,23 @@ Nested Struct
 ]
 -------------
 (source_file
- (assign
+ (compound
   (usage (identifier))
-  (struct
-   (assign
+  (assign (struct
+   (compound
     (usage (identifier))
-    (array
+    (assign (array
      (string (single_quoted))
      (string (single_quoted))
-    )
+    ))
    )
-   (assign
+   (compound
     (usage (identifier))
-    (struct
+    (assign (struct
      (string (single_quoted))
      (decimal)
-    )
+    ))
    )
-  )
+  ))
  )
 )

@@ -4,19 +4,11 @@
     "named": true,
     "subtypes": [
       {
-        "type": "add",
-        "named": true
-      },
-      {
         "type": "and",
         "named": true
       },
       {
         "type": "array",
-        "named": true
-      },
-      {
-        "type": "assign",
         "named": true
       },
       {
@@ -69,10 +61,6 @@
       },
       {
         "type": "struct",
-        "named": true
-      },
-      {
-        "type": "sub",
         "named": true
       },
       {
@@ -154,6 +142,20 @@
     ]
   },
   {
+    "type": "statement",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "compound",
+        "named": true
+      },
+      {
+        "type": "expression",
+        "named": true
+      }
+    ]
+  },
+  {
     "type": "variable",
     "named": true,
     "subtypes": [
@@ -162,42 +164,6 @@
         "named": true
       }
     ]
-  },
-  {
-    "type": "add",
-    "named": true,
-    "fields": {
-      "left": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "+",
-            "named": false
-          }
-        ]
-      },
-      "right": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
   },
   {
     "type": "and",
@@ -256,7 +222,7 @@
       "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "statement",
           "named": true
         }
       ]
@@ -271,7 +237,7 @@
       "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "statement",
           "named": true
         }
       ]
@@ -280,37 +246,16 @@
   {
     "type": "assign",
     "named": true,
-    "fields": {
-      "left": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "=",
-            "named": false
-          }
-        ]
-      },
-      "right": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -372,6 +317,48 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "compound",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assign",
+          "named": true
+        },
+        {
+          "type": "concat",
+          "named": true
+        },
+        {
+          "type": "subtract",
+          "named": true
+        },
+        {
+          "type": "usage",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "concat",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -680,7 +667,7 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "statement",
           "named": true
         }
       ]
@@ -787,7 +774,7 @@
       "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "statement",
           "named": true
         }
       ]
@@ -833,46 +820,25 @@
       "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "statement",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "sub",
+    "type": "subtract",
     "named": true,
-    "fields": {
-      "left": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "-",
-            "named": false
-          }
-        ]
-      },
-      "right": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
     }
   },
   {

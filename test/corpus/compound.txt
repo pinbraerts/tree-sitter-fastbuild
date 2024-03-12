@@ -6,14 +6,10 @@ Compound
 		  - "subtract"
 -------------
 (source_file
- (sub
-  (add
-   (assign
-    (usage (identifier))
-    (string (double_quoted))
-   )
-   (string (double_quoted))
-  )
-  (string (double_quoted))
+ (compound
+  (usage (identifier))
+  (assign (string (double_quoted)))
+  (concat (string (double_quoted)))
+  (subtract (string (double_quoted)))
  )
 )

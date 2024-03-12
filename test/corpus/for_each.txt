@@ -16,13 +16,13 @@ ForEach( .IncPath in .IncPaths )
    )
   )
   body: (array
-   (add
-    left: (usage (identifier))
-    right: (string
+   (compound
+    (usage (identifier))
+    (concat (string
      (single_quoted)
      (interpolation (identifier))
      (single_quoted)
-    )
+    ))
    )
   )
  )

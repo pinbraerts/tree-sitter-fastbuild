@@ -27,6 +27,7 @@ module.exports = grammar({
 	supertypes: $ => [
 		$.literal,
 		$.expression,
+		$.statement,
 		$.number,
 		$.variable,
 		$.function,
@@ -41,7 +42,7 @@ module.exports = grammar({
 	],
 
 	rules: {
-		source_file: $ => repeat($.expression),
+		source_file: $ => repeat($.statement),
 		_separator:        _ => ',',
 		_whitespace:       _ => token(/[\s\u00A0\uFEFF\u3000]+/),                       
 		// http://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
@@ -128,10 +129,10 @@ module.exports = grammar({
 		function: $ => $.identifier,
 		usage: $ => seq(choice('.', '^'), choice($.variable, $.string)),
 
-		array: $ => seq('{', repeat($.expression), '}'),
-		struct: $ => seq('[', repeat($.expression), ']'),
-		arguments: $ => seq('(', repeat($.expression), ')'),
-		parenthesis: $ => seq('(', $.expression, ')'),
+		array: $ => seq('{', repeat($.statement), '}'),
+		struct: $ => seq('[', repeat($.statement), ']'),
+		arguments: $ => seq('(', repeat($.statement), ')'),
+		parenthesis: $ => seq('(', $.statement, ')'),
 
 		function_call: $ => prec.right(precedence.function, seq(
 			field('name', $.function),
@@ -146,6 +147,11 @@ module.exports = grammar({
 			field('body', optional($.array)),
 		)),
 
+		statement: $ => choice(
+			$.compound,
+			$.expression,
+		),
+
 		expression: $ => choice(
 			$.literal,
 			$.usage,
@@ -155,9 +161,6 @@ module.exports = grammar({
 			$.not,
 			$.and,
 			$.or,
-			$.add,
-			$.sub,
-			$.assign,
 			$.in,
 			$.compare,
 			$.not_in,
@@ -168,13 +171,23 @@ module.exports = grammar({
 			$.if,
 		),
 
+		compound: $ => seq(
+			$.usage,
+			choice($.assign, $.concat, $.subtract),
+			repeat(choice($.concat, $.subtract)),
+		),
+
+		assign: $ => seq('=', $.expression),
+		concat: $ => seq('+', $.expression),
+		subtract: $ => seq('-', $.expression),
+
 		not: $ => prec.right(precedence.not, seq(choice('not', '!'), $.expression)),
 
 		...[
 			['and', choice('&&', 'and'), precedence.and],
 			['or', choice('||', 'or'), precedence.or],
-			['add', '+', precedence.add],
-			['sub', '-', precedence.sub],
+			// ['add', '+', precedence.add],
+			// ['sub', '-', precedence.sub],
 			['compare', choice('==', '!=', '>', '<', '>=', '<='), precedence.add],
 		].reduce((result, [name, operator, precedence]) => {
 			result[name] = $ => prec.left(precedence, seq(
@@ -188,7 +201,7 @@ module.exports = grammar({
 		...[
 			['in', 'in', precedence.in],
 			['not_in', alias(seq('not', 'in'), 'not in'), precedence.not_in],
-			['assign', '=', precedence.assign],
+			// ['assign', '=', precedence.assign],
 		].reduce((result, [name, operator, precedence]) => {
 			result[name] = $ => prec.right(precedence, seq(
 				field('left', $.expression),

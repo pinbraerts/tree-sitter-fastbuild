@@ -6,20 +6,20 @@ Variable
 ."constructed$from$other" = {}
 --------
 (source_file
- (assign
+ (compound
   (usage (identifier))
-  (array)
+  (assign (array))
  )
- (assign
+ (compound
   (usage (identifier))
-  (array)
+  (assign (array))
  )
- (assign
+ (compound
   (usage (string
    (double_quoted)
    (interpolation (identifier))
    (double_quoted)
   ))
-  (array)
+  (assign (array))
  )
 )

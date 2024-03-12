@@ -22,7 +22,9 @@
 (array) @local.scope
 (struct) @local.scope
 
-(assign
-  left: (usage (identifier) @local.definition.var))
+(compound
+  (usage (identifier) @local.definition.var)
+  (assign (_))
+)
 
 (identifier) @local.reference

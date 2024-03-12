@@ -25,13 +25,13 @@ Nested Array
   )
   (decimal)
   (decimal)
-  (assign
+  (compound
    (usage (identifier))
-   (struct
+   (assign (struct
     (decimal)
     (decimal)
     (decimal)
-   )
+   ))
   )
  )
 )

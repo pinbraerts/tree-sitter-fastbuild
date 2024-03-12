@@ -14,7 +14,10 @@
  (#eq? @_func "ForEach"))
 (function_call
   body: (array
-    (assign left: (usage (identifier) @variable.parameter))
+    (compound
+	  (usage (identifier) @variable.parameter)
+	  (assign (_))
+	)
   )
 )
 (function_definition (arguments (usage (identifier) @variable.parameter)))

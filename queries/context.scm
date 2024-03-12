@@ -10,13 +10,9 @@
   consequence: (_) @context.end
 ) @context
 
-(assign
-  right: (array) @context.end
-) @context
-
-(assign
-  right: (struct) @context.end
-) @context
+(compound (assign
+  (_)
+)) @context
 
 ; (preprocessor_if) @context.start
 ; (preprocessor_endif) @context.end

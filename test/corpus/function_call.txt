@@ -41,9 +41,9 @@ Library ( "mylib" .identifier )
    (usage (identifier))
   )
   body: (array
-   (assign
-	left: (usage (identifier))
-	right: (string (double_quoted))
+   (compound
+	(usage (identifier))
+	(assign (string (double_quoted)))
    )
   )
  )

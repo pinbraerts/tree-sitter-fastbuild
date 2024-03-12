@@ -88,17 +88,13 @@ Preprocessor in code
 #endif
 --------------------
 (source_file
- (sub
-  left: (add
-   left: (assign
-	left: (usage (identifier))
-    right: (decimal)
-   )
-   (preprocessor_if condition: (identifier))
-   right: (decimal)
-  )
+ (compound
+  (usage (identifier))
+  (assign (decimal))
+  (preprocessor_if condition: (identifier))
+  (concat (decimal))
   (preprocessor_else)
-  right: (decimal)
+  (subtract (decimal))
  )
  (preprocessor_endif)
 )
