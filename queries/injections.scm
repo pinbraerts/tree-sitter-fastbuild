@@ -16,7 +16,7 @@
 (
   (comment)+ @injection.content
   ; (#match? @_start "///")
-  (#set! injection.combined)
+  ; (#set! injection.combined)
   ; (#offset! @injection.content 0 4 0 0)
   (#set! injection.language "jsdoc")
 )
