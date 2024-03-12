@@ -32,10 +32,6 @@
         "named": true
       },
       {
-        "type": "if",
-        "named": true
-      },
-      {
         "type": "in",
         "named": true
       },
@@ -472,32 +468,6 @@
         "types": [
           {
             "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "if",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "consequence": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array",
             "named": true
           }
         ]
@@ -942,10 +912,6 @@
   },
   {
     "type": "@",
-    "named": false
-  },
-  {
-    "type": "If",
     "named": false
   },
   {

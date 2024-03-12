@@ -6,10 +6,6 @@
   body: (_) @context.end
 ) @context
 
-(if
-  consequence: (_) @context.end
-) @context
-
 (compound (assign
   (_)
 )) @context

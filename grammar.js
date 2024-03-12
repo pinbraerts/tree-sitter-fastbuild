@@ -168,7 +168,6 @@ module.exports = grammar({
 			$.function_definition,
 			$.exists,
 			$.file_exists,
-			$.if,
 		),
 
 		compound: $ => seq(
@@ -215,14 +214,6 @@ module.exports = grammar({
 			$.string,
 			$.number,
 			$.boolean,
-		),
-
-
-		if: $ => seq(
-			'If', '(',
-			field('condition', $.expression),
-			')',
-			field('consequence', $.array),
 		),
 
 		number: $ => $.decimal,

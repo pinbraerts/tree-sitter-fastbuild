@@ -27,28 +27,11 @@
         "members": [
           {
             "type": "PATTERN",
-            "value": ";(.|\\r?\\n;)*"
+            "value": ";.*"
           },
           {
             "type": "PATTERN",
-            "value": "\\/\\/(.|\\r?\\n\\/\\/)*"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "/*"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[^*]*\\*+([^/*][^*]*\\*+)*"
-              },
-              {
-                "type": "STRING",
-                "value": "/"
-              }
-            ]
+            "value": "\\/\\/.*"
           }
         ]
       }
@@ -801,10 +784,6 @@
         {
           "type": "SYMBOL",
           "name": "file_exists"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "if"
         }
       ]
     },
@@ -1151,39 +1130,6 @@
         {
           "type": "SYMBOL",
           "name": "boolean"
-        }
-      ]
-    },
-    "if": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "If"
-        },
-        {
-          "type": "STRING",
-          "value": "("
-        },
-        {
-          "type": "FIELD",
-          "name": "condition",
-          "content": {
-            "type": "SYMBOL",
-            "name": "expression"
-          }
-        },
-        {
-          "type": "STRING",
-          "value": ")"
-        },
-        {
-          "type": "FIELD",
-          "name": "consequence",
-          "content": {
-            "type": "SYMBOL",
-            "name": "array"
-          }
         }
       ]
     },
