@@ -32,12 +32,15 @@ function FunctionB( .Arg .Arg2 )
    (usage (identifier))
   )
   body: (array
-   (if
-	condition: (compare
-     left:  (usage (identifier))
-     right: (usage (identifier))
+   (function_call
+	name: (identifier)
+	arguments: (arguments
+		(compare 
+		 left:  (usage (identifier))
+		 right: (usage (identifier))
+		)
     )
-    consequence: (array
+    body: (array
      (function_call
 	  name: (identifier)
 	  arguments: (arguments (string (single_quoted)))

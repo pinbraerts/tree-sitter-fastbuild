@@ -1,10 +1,10 @@
 (identifier) @variable.member
 ; (interpolation (identifier) @variable)
-; (array (expression (identifier) @variable.member))
-; (array (expression (usage (identifier) @variable.member)))
+(array (expression (identifier) @variable.parameter))
+(array (compound (usage (identifier) @variable.parameter)))
 ; (array (expression (interpolation (identifier) @variable.member)))
-; (struct (expression (identifier) @variable.member))
-; (struct (expression (usage (identifier) @variable.member)))
+(struct (expression (identifier) @variable.parameter))
+(struct (compound (usage (identifier) @variable.parameter)))
 ; (struct (expression (interpolation (identifier) @variable.member)))
 ; (arguments (expression (identifier) @variable.parameter))
 (
