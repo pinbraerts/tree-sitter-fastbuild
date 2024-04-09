@@ -54,7 +54,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "\"[\\/\\.\\w\\- ]+\""
+        "value": "[\\/\\.\\w\\- ]+"
       }
     },
     "identifier": {
@@ -233,6 +233,51 @@
         }
       ]
     },
+    "_filename_usage": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "filename"
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": ">"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "\""
+            },
+            {
+              "type": "SYMBOL",
+              "name": "filename"
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": "\""
+              }
+            }
+          ]
+        }
+      ]
+    },
     "_preprocessor": {
       "type": "SEQ",
       "members": [
@@ -331,7 +376,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "filename"
+          "name": "_filename_usage"
         }
       ]
     },
@@ -1184,7 +1229,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "filename"
+          "name": "_filename_usage"
         },
         {
           "type": "STRING",
