@@ -233,7 +233,7 @@
         }
       ]
     },
-    "_filename_usage": {
+    "filename_usage": {
       "type": "CHOICE",
       "members": [
         {
@@ -244,8 +244,12 @@
               "value": "<"
             },
             {
-              "type": "SYMBOL",
-              "name": "filename"
+              "type": "FIELD",
+              "name": "filename",
+              "content": {
+                "type": "SYMBOL",
+                "name": "filename"
+              }
             },
             {
               "type": "IMMEDIATE_TOKEN",
@@ -264,8 +268,12 @@
               "value": "\""
             },
             {
-              "type": "SYMBOL",
-              "name": "filename"
+              "type": "FIELD",
+              "name": "filename",
+              "content": {
+                "type": "SYMBOL",
+                "name": "filename"
+              }
             },
             {
               "type": "IMMEDIATE_TOKEN",
@@ -336,8 +344,12 @@
           "value": "define"
         },
         {
-          "type": "SYMBOL",
-          "name": "variable"
+          "type": "FIELD",
+          "name": "variable",
+          "content": {
+            "type": "SYMBOL",
+            "name": "variable"
+          }
         }
       ]
     },
@@ -349,8 +361,12 @@
           "value": "undef"
         },
         {
-          "type": "SYMBOL",
-          "name": "variable"
+          "type": "FIELD",
+          "name": "variable",
+          "content": {
+            "type": "SYMBOL",
+            "name": "variable"
+          }
         }
       ]
     },
@@ -362,8 +378,12 @@
           "value": "import"
         },
         {
-          "type": "SYMBOL",
-          "name": "environment_variable"
+          "type": "FIELD",
+          "name": "variable",
+          "content": {
+            "type": "SYMBOL",
+            "name": "environment_variable"
+          }
         }
       ]
     },
@@ -376,7 +396,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_filename_usage"
+          "name": "filename_usage"
         }
       ]
     },
@@ -1229,7 +1249,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_filename_usage"
+          "name": "filename_usage"
         },
         {
           "type": "STRING",
@@ -1268,7 +1288,9 @@
       "name": "_preprocessor_end"
     }
   ],
-  "inline": [],
+  "inline": [
+    "filename_usage"
+  ],
   "supertypes": [
     "literal",
     "expression",

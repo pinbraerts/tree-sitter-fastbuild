@@ -390,16 +390,17 @@
   {
     "type": "file_exists",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "filename",
-          "named": true
-        }
-      ]
+    "fields": {
+      "filename": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "filename",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -662,16 +663,17 @@
   {
     "type": "preprocessor_define",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
+    "fields": {
+      "variable": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -693,46 +695,49 @@
   {
     "type": "preprocessor_import",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "environment_variable",
-          "named": true
-        }
-      ]
+    "fields": {
+      "variable": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "environment_variable",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
     "type": "preprocessor_include",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "filename",
-          "named": true
-        }
-      ]
+    "fields": {
+      "filename": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "filename",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
     "type": "preprocessor_undef",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
+    "fields": {
+      "variable": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

@@ -35,6 +35,7 @@ module.exports = grammar({
 	],
 
 	inline: $ => [
+		$.filename_usage,
 	],
 
 	externals: $ => [
@@ -78,9 +79,9 @@ module.exports = grammar({
 			choice(field('number', $.decimal), '@', '*'),
 		),
 
-		_filename_usage: $ => choice(
-			seq('<', $.filename, token.immediate('>')),
-			seq('"', $.filename, token.immediate('"')),
+		filename_usage: $ => choice(
+			seq('<', field("filename", $.filename), token.immediate('>')),
+			seq('"', field("filename", $.filename), token.immediate('"')),
 		),
 
 		_preprocessor: $ => seq('#', choice(
@@ -93,10 +94,10 @@ module.exports = grammar({
 			$.preprocessor_else,
 			$.preprocessor_endif,
 		), $._preprocessor_end),
-		preprocessor_define: $ => seq('define', $.variable),
-		preprocessor_undef: $ => seq('undef', $.variable),
-		preprocessor_import: $ => seq('import', $.environment_variable),
-		preprocessor_include: $ => seq('include', $._filename_usage),
+		preprocessor_define: $ => seq('define', field("variable", $.variable)),
+		preprocessor_undef: $ => seq('undef', field("variable", $.variable)),
+		preprocessor_import: $ => seq('import', field("variable", $.environment_variable)),
+		preprocessor_include: $ => seq('include', $.filename_usage),
 		preprocessor_if: $ => seq('if', field('condition', $.preprocessor_expression)),
 		preprocessor_else: _ => "else",
 		preprocessor_endif: _ => "endif",
@@ -219,7 +220,7 @@ module.exports = grammar({
 		number: $ => $.decimal,
 		boolean: _ => choice('true', 'false'),
 		exists: $ => seq('exists', '(', $.environment_variable, ')'),
-		file_exists: $ => seq('file_exists', '(', $._filename_usage, ')'),
+		file_exists: $ => seq('file_exists', '(', $.filename_usage, ')'),
 
 	},
 })

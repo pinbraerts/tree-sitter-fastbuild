@@ -47,7 +47,7 @@ Preprocessor Condition
   condition: (or
    left: (and
     left: (exists (environment_variable (identifier)))
-    right: (file_exists (filename))
+    right: (file_exists filename: (filename))
    )
    right: (and
 	left: (not (identifier))
