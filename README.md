@@ -60,7 +60,7 @@ New-Item -Type SymbolicLink -Path some\nvim\rtp\path\queries\fastbuild -Value pa
 - [x] [Context](https://github.com/nvim-treesitter/nvim-treesitter-context)
 - [x] Folds
 - [x] Indentation
-- [ ] [Text Objects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
+- [x] [Text Objects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 
 ## Links
 
