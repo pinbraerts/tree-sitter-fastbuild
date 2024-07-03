@@ -10,7 +10,7 @@ ForEach( .IncPath in .IncPaths )
  (function_call
   name: (identifier)
   arguments: (arguments
-   (lookup
+   (in
     left:  (usage (identifier))
     right: (usage (identifier))
    )

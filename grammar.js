@@ -173,7 +173,8 @@ module.exports = grammar({
         $.struct,
         $.parenthesis,
         $.not,
-        $.lookup,
+        $.in,
+        $.not_in,
         $.compare,
         $.function_call,
         $.function_definition,
@@ -198,9 +199,15 @@ module.exports = grammar({
       field("right", $.expression),
     )),
 
-    lookup: ($) => prec.left(precedence.lookup, seq(
+    in: ($) => prec.left(precedence.lookup, seq(
       field("left", $.expression),
-      field("operator", choice("in", alias(seq("not", "in"), "not in"))),
+      field("operator", "in"),
+      field("right", $.expression),
+    )),
+
+    not_in: ($) => prec.left(precedence.lookup, seq(
+      field("left", $.expression),
+      field("operator", alias(seq("not", "in"), "not in")),
       field("right", $.expression),
     )),
 
