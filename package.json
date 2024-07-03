@@ -16,9 +16,13 @@
   "scripts": {
     "test": "tree-sitter test"
   },
-  "tree-sitter": [{
-    "scope": "source.fastbuild",
-    "file-types": [ "bff" ],
-    "first-line-regex": "#!.*\\bfbuild$"
-  }]
+  "tree-sitter": [
+    {
+      "scope": "source.fastbuild",
+      "file-types": [
+        "bff"
+      ],
+      "first-line-regex": "#!.*\\bfbuild$"
+    }
+  ]
 }
