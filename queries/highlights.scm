@@ -40,7 +40,7 @@
 
 (
   (function_call (identifier) @_func @function.builtin)
-  (#any-of? @_func "Alias" "Compiler" "Copy" "CopyDir" "CSAssembly" "DLL" "Error" "Exec" "Executable" "Library" "ListDependencies" "ObjectList" "Print" "RemoveDir" "Settings" "Test" "TextFile" "Unity" "Using" "VCXProject" "VSProjectExternal" "VSSolution" "XCodeProject")
+  (#any-of? @_func "exists" "file_exists" "Alias" "Compiler" "Copy" "CopyDir" "CSAssembly" "DLL" "Error" "Exec" "Executable" "Library" "ListDependencies" "ObjectList" "Print" "RemoveDir" "Settings" "Test" "TextFile" "Unity" "Using" "VCXProject" "VSProjectExternal" "VSSolution" "XCodeProject")
 )
 
 (

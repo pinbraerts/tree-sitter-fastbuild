@@ -106,9 +106,12 @@ module.exports = grammar({
         alias($.preprocessor_not, $.not),
         alias($.preprocessor_and, $.and),
         alias($.preprocessor_or, $.or),
-        $.exists,
-        $.file_exists,
+        alias($.preprocessor_call, $.function_call),
       ),
+    preprocessor_call: ($) => seq(
+      field("name", $.identifier),
+      '(', field("arguments", repeat($.preprocessor_expression)), ')',
+    ),
     preprocessor_or: ($) =>
       prec.left(
         precedence.or,
@@ -174,8 +177,6 @@ module.exports = grammar({
         $.compare,
         $.function_call,
         $.function_definition,
-        $.exists,
-        $.file_exists,
       ),
 
     compound: ($) => seq(field("left", $.usage), repeat1(choice($.assign, $.concatenate, $.subtract))),
@@ -211,7 +212,5 @@ module.exports = grammar({
 
     number: ($) => $.decimal,
     boolean: (_) => choice("true", "false"),
-    exists: ($) => seq("exists", "(", $.environment_variable, ")"),
-    file_exists: ($) => seq("file_exists", "(", $.filename_usage, ")"),
   },
 });

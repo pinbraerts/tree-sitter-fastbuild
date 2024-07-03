@@ -13,7 +13,7 @@ Preprocessor Import
    # 	import VS120COMNTOOLS
 -------------------
 (source_file
- (preprocessor_import (environment_variable (identifier)))
+ (preprocessor_import (identifier))
 )
 
 ====================
@@ -46,8 +46,11 @@ Preprocessor Condition
  (preprocessor_if
   condition: (or
    left: (and
-    left: (exists (environment_variable (identifier)))
-    right: (file_exists filename: (filename))
+    left: (function_call
+      name: (identifier)
+      arguments: (identifier)
+    )
+    right: (function_call name: (identifier) arguments: (string (double_quoted)))
    )
    right: (and
 	left: (not (identifier))
