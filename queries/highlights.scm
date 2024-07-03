@@ -1,10 +1,11 @@
-(identifier) @variable.member
+(identifier) @variable
+(interpolation) @none
 ; (interpolation (identifier) @variable)
 (array (expression (identifier) @variable.parameter))
-(array (compound (usage (identifier) @variable.parameter)))
+;(array (compound (usage (identifier) @variable.parameter)))
 ; (array (expression (interpolation (identifier) @variable.member)))
-(struct (expression (identifier) @variable.parameter))
-(struct (compound (usage (identifier) @variable.parameter)))
+(struct (expression (identifier) @variable.member))
+(struct (compound (usage (identifier) @variable.member)))
 ; (struct (expression (interpolation (identifier) @variable.member)))
 ; (arguments (expression (identifier) @variable.parameter))
 (
@@ -12,17 +13,20 @@
   name: (identifier) @_func
   (arguments (in left: (usage (identifier) @variable.parameter))))
  (#eq? @_func "ForEach"))
-(function_call
-  body: (array
-    (compound
-	  (usage (identifier) @variable.parameter)
-	  (assign (_))
-	)
-  )
-)
+
+; (function_call
+;   body: (array
+;     (compound
+; 	  (usage (identifier) @variable.parameter)
+; 	  (assign (_))
+; 	)
+;   )
+; )
+
 (function_definition (arguments (usage (identifier) @variable.parameter)))
 ; (arguments (expression (interpolation (identifier) @variable.parameter)))
 (preprocessor_if (identifier) @function.macro)
+(preprocessor_define variable: (identifier) @function.macro)
 
 (function_call name: (identifier) @function.call)
 (function_definition "function" @keyword.function)
@@ -62,7 +66,7 @@
  ">=" "<="
 ] @operator
 
-[ "and" "or" "in" "not in" "not" ] @keyword.operator
+[ "&&" "||" "in" "not in" ] @keyword.operator
 
 (comment) @comment @spell
 
@@ -79,7 +83,7 @@
 (decimal) @number
 [ "true" "false" ] @boolean
 [ (filename) (string) ] @string
-[ (escape_sequence) (interpolation) (placeholder) ] @string.escape
+[ (escape_sequence) (placeholder) "$" "%" ] @string.escape
 
-[ "$" "%" "#" "." "^" ] @punctuation.special
+[ "#" "." "^" ] @punctuation.special
 [ "[" "]" "(" ")" "{" "}" ] @punctuation.bracket
