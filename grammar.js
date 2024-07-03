@@ -187,7 +187,7 @@ module.exports = grammar({
     and: ($) => seq("&&", field("right", $.expression)),
     or: ($) => seq("||", field("right", $.expression)),
 
-    not: ($) => prec.right(precedence.not, seq(choice("not", "!"), field("right", $.expression))),
+    not: ($) => prec.right(precedence.not, seq("!", field("right", $.expression))),
 
     compare: ($) => prec.left(precedence.compare, seq(
       field("left", $.expression),
