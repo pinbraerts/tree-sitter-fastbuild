@@ -91,8 +91,7 @@ module.exports = grammar({
       ),
     preprocessor_define: ($) => seq("define", field("variable", $.identifier)),
     preprocessor_undef: ($) => seq("undef", field("variable", $.identifier)),
-    preprocessor_import: ($) =>
-      seq("import", field("variable", $.identifier)),
+    preprocessor_import: ($) => seq("import", field("variable", $.identifier)),
     preprocessor_include: ($) => seq("include", $.filename_usage),
     preprocessor_if: ($) =>
       seq("if", field("condition", $.preprocessor_expression)),
@@ -108,10 +107,13 @@ module.exports = grammar({
         alias($.preprocessor_or, $.or),
         alias($.preprocessor_call, $.function_call),
       ),
-    preprocessor_call: ($) => seq(
-      field("name", $.identifier),
-      '(', field("arguments", repeat($.preprocessor_expression)), ')',
-    ),
+    preprocessor_call: ($) =>
+      seq(
+        field("name", $.identifier),
+        "(",
+        field("arguments", repeat($.preprocessor_expression)),
+        ")",
+      ),
     preprocessor_or: ($) =>
       prec.left(
         precedence.or,
@@ -184,34 +186,52 @@ module.exports = grammar({
         $.function_definition,
       ),
 
-    compound: ($) => seq(field("left", $.usage), repeat1(choice($.assign, $.concatenate, $.subtract))),
+    compound: ($) =>
+      seq(
+        field("left", $.usage),
+        repeat1(choice($.assign, $.concatenate, $.subtract)),
+      ),
     assign: ($) => seq("=", field("right", choice($.expression, $.logic))),
     concatenate: ($) => seq("+", field("right", choice($.expression, $.logic))),
     subtract: ($) => seq("-", field("right", choice($.expression, $.logic))),
 
-    logic: ($) => seq(field("left", $.expression), repeat1(choice($.and, $.or))),
+    logic: ($) =>
+      seq(field("left", $.expression), repeat1(choice($.and, $.or))),
     and: ($) => seq("&&", field("right", $.expression)),
     or: ($) => seq("||", field("right", $.expression)),
 
-    not: ($) => prec.right(precedence.not, seq("!", field("right", $.expression))),
+    not: ($) =>
+      prec.right(precedence.not, seq("!", field("right", $.expression))),
 
-    compare: ($) => prec.left(precedence.compare, seq(
-      field("left", $.expression),
-      field("operator", choice("==", "!=", ">", "<", ">=", "<=")),
-      field("right", $.expression),
-    )),
+    compare: ($) =>
+      prec.left(
+        precedence.compare,
+        seq(
+          field("left", $.expression),
+          field("operator", choice("==", "!=", ">", "<", ">=", "<=")),
+          field("right", $.expression),
+        ),
+      ),
 
-    in: ($) => prec.left(precedence.lookup, seq(
-      field("left", $.expression),
-      field("operator", "in"),
-      field("right", $.expression),
-    )),
+    in: ($) =>
+      prec.left(
+        precedence.lookup,
+        seq(
+          field("left", $.expression),
+          field("operator", "in"),
+          field("right", $.expression),
+        ),
+      ),
 
-    not_in: ($) => prec.left(precedence.lookup, seq(
-      field("left", $.expression),
-      field("operator", alias(seq("not", "in"), "not in")),
-      field("right", $.expression),
-    )),
+    not_in: ($) =>
+      prec.left(
+        precedence.lookup,
+        seq(
+          field("left", $.expression),
+          field("operator", alias(seq("not", "in"), "not in")),
+          field("right", $.expression),
+        ),
+      ),
 
     literal: ($) => choice($.string, $.number, $.boolean),
 
