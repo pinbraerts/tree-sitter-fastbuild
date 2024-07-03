@@ -112,7 +112,7 @@ Compiler('Compiler-Clang') {
 	.AdditionalWarnings = '' // 'wd' disables warning 'we' enables
 		+ ' /wd4820' // padding added after data member
 	.CompilerOptions = ''
-		+ '"%1" /Z7'            // 
+		+ '"%1" /Z7'            //
 		+ ' /nologo'            // Suppresses the display of the copyright banner
 		+ ' /c'                 // Compiles without linking
 		+ ' /W4'                // Warning level 4
@@ -236,7 +236,7 @@ Compiler('Compiler-Clang') {
 .MSVC14_BaseConfig = [
 	.AdditionalWarnings = ''
 	.CompilerOptions = ''
-		+ '"%1" /Z7'            // 
+		+ '"%1" /Z7'            //
 		+ ' /nologo'            // Suppresses the display of the copyright banner
 		+ ' /c'                 // Compiles without linking
 		+ ' /W4'                // Warning level 4
@@ -357,7 +357,7 @@ Compiler('Compiler-Clang') {
 .MSVC15_BaseConfig = [
 	.AdditionalWarnings = ''
 	.CompilerOptions = ''
-		+ '"%1" /Z7'            // 
+		+ '"%1" /Z7'            //
 		+ ' /nologo'            // Suppresses the display of the copyright banner
 		+ ' /c'                 // Compiles without linking
 		+ ' /W4'                // Warning level 4
@@ -484,7 +484,7 @@ Compiler('Compiler-Clang') {
 	.Compiler       = 'Compiler-ClangWin'
 	.Librarian      = '$ToolsBasePath$\bin\llvm-ar.exe'
 	.Linker         = '$MSVC15_BasePath$\bin\link.exe'
-	
+
 	.BaseCompilerOptions = ' -o"%2" "%1" -c -g '
 		+ ' -fintegrated-as'
 		+ ' -Wpedantic'
@@ -514,7 +514,7 @@ Compiler('Compiler-Clang') {
 		+ ' -I"./some_app"'
 		// Defines
 		+ ' -DWIN32_LEAN_AND_MEAN -D_WIN32 -D__WINDOWS__ -DWIN32'
-		+ ' -D_CRT_DECLARE_NONSTDC_NAMES' 
+		+ ' -D_CRT_DECLARE_NONSTDC_NAMES'
 		+ ' -D_CRT_SECURE_NO_WARNINGS'
 		+ ' -D_WINSOCK_DEPRECATED_NO_WARNINGS'
 		// x64
@@ -559,11 +559,11 @@ Compiler('Compiler-Clang') {
 	Using(.WinClang_x64_BaseConfig)
 	.Config          = 'Release'
 	.CompilerOptions + ' -DRELEASE'
-	
+
 	// Setup de-optimization options (FASTBUILD_DEOPTIMIZE_OBJECT)
 	.DeoptimizeWritableFilesWithToken   = true
 	.CompilerOptionsDeoptimized         = '$CompilerOptions$ /Od'
-	
+
 	.CompilerOptions  + .CompilerReleaseOptimizations
 	.LibrarianOptions + .LibrarianReleaseOptimizations
 	.LinkerOptions    + .LinkerReleaseOptimizations
