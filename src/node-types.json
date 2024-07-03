@@ -4,10 +4,6 @@
     "named": true,
     "subtypes": [
       {
-        "type": "and",
-        "named": true
-      },
-      {
         "type": "array",
         "named": true
       },
@@ -32,23 +28,15 @@
         "named": true
       },
       {
-        "type": "in",
-        "named": true
-      },
-      {
         "type": "literal",
         "named": true
       },
       {
+        "type": "lookup",
+        "named": true
+      },
+      {
         "type": "not",
-        "named": true
-      },
-      {
-        "type": "not_in",
-        "named": true
-      },
-      {
-        "type": "or",
         "named": true
       },
       {
@@ -148,6 +136,10 @@
       {
         "type": "expression",
         "named": true
+      },
+      {
+        "type": "logic",
+        "named": true
       }
     ]
   },
@@ -167,29 +159,11 @@
     "fields": {
       "left": {
         "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          },
-          {
-            "type": "preprocessor_expression",
-            "named": true
-          }
-        ]
-      },
-      "operator": {
-        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "&&",
-            "named": false
-          },
-          {
-            "type": "and",
-            "named": false
+            "type": "preprocessor_expression",
+            "named": true
           }
         ]
       },
@@ -242,16 +216,21 @@
   {
     "type": "assign",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
+    "fields": {
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "logic",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -318,7 +297,18 @@
   {
     "type": "compound",
     "named": true,
-    "fields": {},
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "usage",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -328,33 +318,34 @@
           "named": true
         },
         {
-          "type": "concat",
+          "type": "concatenate",
           "named": true
         },
         {
           "type": "subtract",
-          "named": true
-        },
-        {
-          "type": "usage",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "concat",
+    "type": "concatenate",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
+    "fields": {
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "logic",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -476,42 +467,6 @@
     }
   },
   {
-    "type": "in",
-    "named": true,
-    "fields": {
-      "left": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "in",
-            "named": false
-          }
-        ]
-      },
-      "right": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "interpolation",
     "named": true,
     "fields": {},
@@ -527,26 +482,37 @@
     }
   },
   {
-    "type": "not",
+    "type": "logic",
     "named": true,
-    "fields": {},
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "and",
           "named": true
         },
         {
-          "type": "preprocessor_expression",
+          "type": "or",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "not_in",
+    "type": "lookup",
     "named": true,
     "fields": {
       "left": {
@@ -563,6 +529,10 @@
         "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "in",
+            "named": false
+          },
           {
             "type": "not in",
             "named": false
@@ -582,34 +552,42 @@
     }
   },
   {
+    "type": "not",
+    "named": true,
+    "fields": {
+      "right": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "preprocessor_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "or",
     "named": true,
     "fields": {
       "left": {
         "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          },
-          {
-            "type": "preprocessor_expression",
-            "named": true
-          }
-        ]
-      },
-      "operator": {
-        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "or",
-            "named": false
-          },
-          {
-            "type": "||",
-            "named": false
+            "type": "preprocessor_expression",
+            "named": true
           }
         ]
       },
@@ -804,16 +782,21 @@
   {
     "type": "subtract",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
+    "fields": {
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "logic",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -932,10 +915,6 @@
     "named": false
   },
   {
-    "type": "and",
-    "named": false
-  },
-  {
     "type": "comment",
     "named": true
   },
@@ -1001,10 +980,6 @@
   },
   {
     "type": "not in",
-    "named": false
-  },
-  {
-    "type": "or",
     "named": false
   },
   {

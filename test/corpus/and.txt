@@ -4,24 +4,23 @@ And
 .MyBoolean && .AnotherBoolean
 ---
 (source_file
- (and
+ (logic
   left:  (usage (identifier))
-  right: (usage (identifier))
+  (and right: (usage (identifier)))
  )
 )
 
 ============
 And Multiple
 ============
-.Bool1 && .Bool2 && .Bool3
+.Bool1 && .Bool2 || .Bool3 && .Bool4
 ------------
 (source_file
- (and
-  left: (and
-   left:  (usage (identifier))
-   right: (usage (identifier))
-  )
-  right: (usage (identifier))
+ (logic
+  left: (usage (identifier))
+  (and right: (usage (identifier)))
+  (or  right: (usage (identifier)))
+  (and right: (usage (identifier)))
  )
 )
 
@@ -31,14 +30,14 @@ And Parenthesis
 ( 1 <= .Int ) && ( .Int <= 10 )
 ---------------
 (source_file
- (and
+ (logic
   left: (parenthesis (compare
    left:  (decimal)
    right: (usage (identifier))
   ))
-  right: (parenthesis (compare
+  (and right: (parenthesis (compare
    left:  (usage (identifier))
    right: (decimal)
-  ))
+  )))
  )
 )

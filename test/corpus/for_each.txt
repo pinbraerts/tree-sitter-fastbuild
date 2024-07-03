@@ -10,15 +10,15 @@ ForEach( .IncPath in .IncPaths )
  (function_call
   name: (identifier)
   arguments: (arguments
-   (in
+   (lookup
     left:  (usage (identifier))
     right: (usage (identifier))
    )
   )
   body: (array
    (compound
-    (usage (identifier))
-    (concat (string
+    left: (usage (identifier))
+    (concatenate right: (string
      (single_quoted)
      (interpolation (identifier))
      (single_quoted)

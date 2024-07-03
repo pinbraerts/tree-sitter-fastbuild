@@ -1,12 +1,8 @@
 let precedence = {
-  add: 1,
-  sub: 1,
-  assign: 2,
-  or: 3,
-  and: 4,
+  or: 2,
+  and: 3,
   compare: 5,
-  in: 6,
-  not_in: 6,
+  lookup: 6,
   not: 7,
   function: 8,
 };
@@ -167,7 +163,7 @@ module.exports = grammar({
         ),
       ),
 
-    statement: ($) => choice($.compound, $.expression),
+    statement: ($) => choice($.compound, $.logic, $.expression),
 
     expression: ($) =>
       choice(
@@ -177,66 +173,36 @@ module.exports = grammar({
         $.struct,
         $.parenthesis,
         $.not,
-        $.and,
-        $.or,
-        $.in,
+        $.lookup,
         $.compare,
-        $.not_in,
         $.function_call,
         $.function_definition,
         $.exists,
         $.file_exists,
       ),
 
-    compound: ($) =>
-      seq(
-        $.usage,
-        choice($.assign, $.concat, $.subtract),
-        repeat(choice($.concat, $.subtract)),
-      ),
+    compound: ($) => seq(field("left", $.usage), repeat1(choice($.assign, $.concatenate, $.subtract))),
+    assign: ($) => seq("=", field("right", choice($.expression, $.logic))),
+    concatenate: ($) => seq("+", field("right", choice($.expression, $.logic))),
+    subtract: ($) => seq("-", field("right", choice($.expression, $.logic))),
 
-    assign: ($) => seq("=", $.expression),
-    concat: ($) => seq("+", $.expression),
-    subtract: ($) => seq("-", $.expression),
+    logic: ($) => seq(field("left", $.expression), repeat1(choice($.and, $.or))),
+    and: ($) => seq("&&", field("right", $.expression)),
+    or: ($) => seq("||", field("right", $.expression)),
 
-    not: ($) =>
-      prec.right(precedence.not, seq(choice("not", "!"), $.expression)),
+    not: ($) => prec.right(precedence.not, seq(choice("not", "!"), field("right", $.expression))),
 
-    ...[
-      ["and", choice("&&", "and"), precedence.and],
-      ["or", choice("||", "or"), precedence.or],
-      // ['add', '+', precedence.add],
-      // ['sub', '-', precedence.sub],
-      ["compare", choice("==", "!=", ">", "<", ">=", "<="), precedence.add],
-    ].reduce((result, [name, operator, precedence]) => {
-      result[name] = ($) =>
-        prec.left(
-          precedence,
-          seq(
-            field("left", $.expression),
-            field("operator", operator),
-            field("right", $.expression),
-          ),
-        );
-      return result;
-    }, {}),
+    compare: ($) => prec.left(precedence.compare, seq(
+      field("left", $.expression),
+      field("operator", choice("==", "!=", ">", "<", ">=", "<=")),
+      field("right", $.expression),
+    )),
 
-    ...[
-      ["in", "in", precedence.in],
-      ["not_in", alias(seq("not", "in"), "not in"), precedence.not_in],
-      // ['assign', '=', precedence.assign],
-    ].reduce((result, [name, operator, precedence]) => {
-      result[name] = ($) =>
-        prec.right(
-          precedence,
-          seq(
-            field("left", $.expression),
-            field("operator", operator),
-            field("right", $.expression),
-          ),
-        );
-      return result;
-    }, {}),
+    lookup: ($) => prec.left(precedence.lookup, seq(
+      field("left", $.expression),
+      field("operator", choice("in", alias(seq("not", "in"), "not in"))),
+      field("right", $.expression),
+    )),
 
     literal: ($) => choice($.string, $.number, $.boolean),
 

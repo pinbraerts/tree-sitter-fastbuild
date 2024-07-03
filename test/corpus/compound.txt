@@ -9,7 +9,7 @@ Compound
  (compound
   (usage (identifier))
   (assign (string (double_quoted)))
-  (concat (string (double_quoted)))
+  (concatenate (string (double_quoted)))
   (subtract (string (double_quoted)))
  )
 )

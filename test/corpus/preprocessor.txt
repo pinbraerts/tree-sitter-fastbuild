@@ -89,12 +89,12 @@ Preprocessor in code
 --------------------
 (source_file
  (compound
-  (usage (identifier))
-  (assign (decimal))
+  left: (usage (identifier))
+  (assign right: (decimal))
   (preprocessor_if condition: (identifier))
-  (concat (decimal))
+  (concatenate right: (decimal))
   (preprocessor_else)
-  (subtract (decimal))
+  (subtract right: (decimal))
  )
  (preprocessor_endif)
 )
