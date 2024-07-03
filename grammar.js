@@ -25,8 +25,6 @@ module.exports = grammar({
     $.expression,
     $.statement,
     $.number,
-    $.variable,
-    $.function,
     $.preprocessor_expression,
   ],
 
@@ -91,10 +89,10 @@ module.exports = grammar({
         ),
         $._preprocessor_end,
       ),
-    preprocessor_define: ($) => seq("define", field("variable", $.variable)),
-    preprocessor_undef: ($) => seq("undef", field("variable", $.variable)),
+    preprocessor_define: ($) => seq("define", field("variable", $.identifier)),
+    preprocessor_undef: ($) => seq("undef", field("variable", $.identifier)),
     preprocessor_import: ($) =>
-      seq("import", field("variable", $.environment_variable)),
+      seq("import", field("variable", $.identifier)),
     preprocessor_include: ($) => seq("include", $.filename_usage),
     preprocessor_if: ($) =>
       seq("if", field("condition", $.preprocessor_expression)),
@@ -104,7 +102,7 @@ module.exports = grammar({
     preprocessor_expression: ($) =>
       choice(
         $.literal,
-        $.variable,
+        $.identifier,
         alias($.preprocessor_not, $.not),
         alias($.preprocessor_and, $.and),
         alias($.preprocessor_or, $.or),
@@ -133,9 +131,7 @@ module.exports = grammar({
       prec.right(precedence.not, seq("!", $.preprocessor_expression)),
 
     environment_variable: ($) => $.identifier,
-    variable: ($) => $.identifier,
-    function: ($) => $.identifier,
-    usage: ($) => seq(choice(".", "^"), choice($.variable, $.string)),
+    usage: ($) => seq(choice(".", "^"), choice($.identifier, $.string)),
 
     array: ($) => seq("{", repeat($.statement), "}"),
     struct: ($) => seq("[", repeat($.statement), "]"),
