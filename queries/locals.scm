@@ -1,10 +1,9 @@
 (source_file) @local.scope
 
-(preprocessor_import
-  (environment_variable) @local.definition.import)
+(preprocessor_import (identifier) @local.definition.import)
 
-(preprocessor_include
-  (filename) @local.definition.import)
+(preprocessor_define
+  (identifier) @local.definition.macro)
 
 (arguments
   (usage (identifier) @local.definition.parameter))
@@ -19,7 +18,7 @@
     left: (usage (identifier) @local.definition.var))))
   (#eq? @_func "ForEach"))
 
-(array) @local.scope
+; (array) @local.scope
 (struct) @local.scope
 
 (compound
