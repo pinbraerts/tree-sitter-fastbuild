@@ -145,9 +145,14 @@ module.exports = grammar({
       prec.right(
         precedence.function,
         seq(
-          field("name", $.function),
-          field("arguments", optional($.arguments)),
-          field("body", optional($.array)),
+          field("name", $.identifier),
+          choice(
+            seq(
+              field("arguments", $.arguments),
+              field("body", optional($.array)),
+            ),
+            field("body", $.array),
+          ),
         ),
       ),
 
