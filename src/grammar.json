@@ -233,59 +233,6 @@
         }
       ]
     },
-    "filename_usage": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "<"
-            },
-            {
-              "type": "FIELD",
-              "name": "filename",
-              "content": {
-                "type": "SYMBOL",
-                "name": "filename"
-              }
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "STRING",
-                "value": ">"
-              }
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "\""
-            },
-            {
-              "type": "FIELD",
-              "name": "filename",
-              "content": {
-                "type": "SYMBOL",
-                "name": "filename"
-              }
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "STRING",
-                "value": "\""
-              }
-            }
-          ]
-        }
-      ]
-    },
     "_preprocessor": {
       "type": "SEQ",
       "members": [
@@ -327,6 +274,10 @@
             {
               "type": "SYMBOL",
               "name": "preprocessor_endif"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "preprocessor_unknown"
             }
           ]
         },
@@ -335,6 +286,10 @@
           "name": "_preprocessor_end"
         }
       ]
+    },
+    "preprocessor_unknown": {
+      "type": "SYMBOL",
+      "name": "identifier"
     },
     "preprocessor_define": {
       "type": "SEQ",
@@ -395,8 +350,12 @@
           "value": "include"
         },
         {
-          "type": "SYMBOL",
-          "name": "filename_usage"
+          "type": "FIELD",
+          "name": "filename",
+          "content": {
+            "type": "SYMBOL",
+            "name": "string"
+          }
         }
       ]
     },
@@ -579,8 +538,12 @@
             "value": "!"
           },
           {
-            "type": "SYMBOL",
-            "name": "preprocessor_expression"
+            "type": "FIELD",
+            "name": "right",
+            "content": {
+              "type": "SYMBOL",
+              "name": "preprocessor_expression"
+            }
           }
         ]
       }
@@ -712,46 +675,36 @@
             }
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "FIELD",
-                    "name": "arguments",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "arguments"
-                    }
-                  },
-                  {
-                    "type": "FIELD",
-                    "name": "body",
-                    "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "array"
-                        },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "FIELD",
-                "name": "body",
-                "content": {
+            "type": "FIELD",
+            "name": "arguments",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "arguments"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "body",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
                   "type": "SYMBOL",
                   "name": "array"
+                },
+                {
+                  "type": "BLANK"
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       }
@@ -1273,9 +1226,7 @@
       "name": "_preprocessor_end"
     }
   ],
-  "inline": [
-    "filename_usage"
-  ],
+  "inline": [],
   "supertypes": [
     "literal",
     "expression",

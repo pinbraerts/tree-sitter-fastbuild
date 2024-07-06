@@ -74,6 +74,7 @@
  "undef"
  "if"
  (preprocessor_else)
+ ((preprocessor_unknown) (#set! "priority" 101))
  (preprocessor_endif)
  (preprocessor_once)
 ] @keyword.directive
@@ -82,7 +83,7 @@
 
 (decimal) @number
 [ "true" "false" ] @boolean
-[ (filename) (string) ] @string
+(string) @string
 [ (escape_sequence) (placeholder) "$" "%" ] @string.escape
 
 [ "#" "." "^" ] @punctuation.special

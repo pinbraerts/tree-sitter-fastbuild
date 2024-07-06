@@ -22,7 +22,7 @@ Preprocessor Include
   #    include "/some/file/full/path.txt"
 --------------------
 (source_file
- (preprocessor_include (filename))
+ (preprocessor_include (string (double_quoted)))
 )
 
 ===================
@@ -53,7 +53,7 @@ Preprocessor Condition
     right: (function_call name: (identifier) arguments: (string (double_quoted)))
    )
    right: (and
-	left: (not (identifier))
+	left: (not right: (identifier))
     right: (identifier)
    )
   )
@@ -101,3 +101,15 @@ Preprocessor in code
  )
  (preprocessor_endif)
 )
+
+===
+preprocessor unknown
+===
+
+#some
+
+// comment
+---
+(source_file
+ (preprocessor_unknown (identifier))
+ (comment))

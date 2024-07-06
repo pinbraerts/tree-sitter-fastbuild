@@ -28,7 +28,7 @@ module.exports = grammar({
     $.preprocessor_expression,
   ],
 
-  inline: ($) => [$.filename_usage],
+  inline: ($) => [],
 
   externals: ($) => [$._preprocessor_end],
 
@@ -68,12 +68,6 @@ module.exports = grammar({
     placeholder: ($) =>
       seq(token.immediate("%"), choice(field("number", $.decimal), "@", "*")),
 
-    filename_usage: ($) =>
-      choice(
-        seq("<", field("filename", $.filename), token.immediate(">")),
-        seq('"', field("filename", $.filename), token.immediate('"')),
-      ),
-
     _preprocessor: ($) =>
       seq(
         "#",
@@ -86,13 +80,15 @@ module.exports = grammar({
           $.preprocessor_once,
           $.preprocessor_else,
           $.preprocessor_endif,
+          $.preprocessor_unknown,
         ),
         $._preprocessor_end,
       ),
+    preprocessor_unknown: ($) => $.identifier,
     preprocessor_define: ($) => seq("define", field("variable", $.identifier)),
     preprocessor_undef: ($) => seq("undef", field("variable", $.identifier)),
     preprocessor_import: ($) => seq("import", field("variable", $.identifier)),
-    preprocessor_include: ($) => seq("include", $.filename_usage),
+    preprocessor_include: ($) => seq("include", field("filename", $.string)),
     preprocessor_if: ($) =>
       seq("if", field("condition", $.preprocessor_expression)),
     preprocessor_else: (_) => "else",
@@ -133,7 +129,10 @@ module.exports = grammar({
         ),
       ),
     preprocessor_not: ($) =>
-      prec.right(precedence.not, seq("!", $.preprocessor_expression)),
+      prec.right(
+        precedence.not,
+        seq("!", field("right", $.preprocessor_expression)),
+      ),
 
     environment_variable: ($) => $.identifier,
     usage: ($) => seq(choice(".", "^"), choice($.identifier, $.string)),
@@ -148,13 +147,8 @@ module.exports = grammar({
         precedence.function,
         seq(
           field("name", $.identifier),
-          choice(
-            seq(
-              field("arguments", $.arguments),
-              field("body", optional($.array)),
-            ),
-            field("body", $.array),
-          ),
+          field("arguments", optional($.arguments)),
+          field("body", optional($.array)),
         ),
       ),
 
