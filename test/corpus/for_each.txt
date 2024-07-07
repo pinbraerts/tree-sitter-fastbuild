@@ -19,9 +19,9 @@ ForEach( .IncPath in .IncPaths )
    (compound
     left: (usage (identifier))
     (concatenate right: (string
-     (single_quoted)
-     (interpolation (identifier))
-     (single_quoted)
+     single_quoted: (single_quoted)
+     interpolation: (interpolation variable: (identifier))
+     single_quoted: (single_quoted)
     ))
    )
   )

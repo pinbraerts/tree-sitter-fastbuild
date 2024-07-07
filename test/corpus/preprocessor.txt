@@ -50,7 +50,7 @@ Preprocessor Condition
       name: (identifier)
       arguments: (identifier)
     )
-    right: (function_call name: (identifier) arguments: (string (double_quoted)))
+    right: (function_call name: (identifier) arguments: (string double_quoted: (double_quoted)))
    )
    right: (and
 	left: (not right: (identifier))

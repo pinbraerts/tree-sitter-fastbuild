@@ -52,21 +52,22 @@ module.exports = grammar({
       ),
     _single_inner: ($) =>
       choice(
-        $.single_quoted,
-        $.interpolation,
-        $.placeholder,
-        $.escape_sequence,
+        field("single_quoted", $.single_quoted),
+        field("interpolation", $.interpolation),
+        field("placeholder", $.placeholder),
+        field("escape_sequence", $.escape_sequence),
       ),
     _double_inner: ($) =>
       choice(
-        $.double_quoted,
-        $.interpolation,
-        $.placeholder,
-        $.escape_sequence,
+        field("double_quoted", $.double_quoted),
+        field("interpolation", $.interpolation),
+        field("placeholder", $.placeholder),
+        field("escape_sequence", $.escape_sequence),
       ),
-    interpolation: ($) => seq(token.immediate("$"), $.identifier, "$"),
+    interpolation: ($) =>
+      seq(token.immediate("$"), field("variable", $.identifier), "$"),
     placeholder: ($) =>
-      seq(token.immediate("%"), choice(field("number", $.decimal), "@", "*")),
+      seq(token.immediate("%"), field("argument", choice($.decimal, "@", "*"))),
 
     _preprocessor: ($) =>
       seq(

@@ -21,7 +21,7 @@ function FunctionB( .Arg .Arg2 )
   body: (array
    (function_call
 	name: (identifier)
-	arguments: (arguments (string (single_quoted)))
+	arguments: (arguments (string single_quoted: (single_quoted)))
    )
   )
  )
@@ -35,7 +35,7 @@ function FunctionB( .Arg .Arg2 )
    (function_call
 	name: (identifier)
 	arguments: (arguments
-		(compare 
+		(compare
 		 left:  (usage (identifier))
 		 right: (usage (identifier))
 		)
@@ -43,7 +43,7 @@ function FunctionB( .Arg .Arg2 )
     body: (array
      (function_call
 	  name: (identifier)
-	  arguments: (arguments (string (single_quoted)))
+	  arguments: (arguments (string single_quoted: (single_quoted)))
 	 )
     )
    )

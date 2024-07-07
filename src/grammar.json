@@ -142,20 +142,36 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "single_quoted"
+          "type": "FIELD",
+          "name": "single_quoted",
+          "content": {
+            "type": "SYMBOL",
+            "name": "single_quoted"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "interpolation"
+          "type": "FIELD",
+          "name": "interpolation",
+          "content": {
+            "type": "SYMBOL",
+            "name": "interpolation"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "placeholder"
+          "type": "FIELD",
+          "name": "placeholder",
+          "content": {
+            "type": "SYMBOL",
+            "name": "placeholder"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "escape_sequence"
+          "type": "FIELD",
+          "name": "escape_sequence",
+          "content": {
+            "type": "SYMBOL",
+            "name": "escape_sequence"
+          }
         }
       ]
     },
@@ -163,20 +179,36 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "double_quoted"
+          "type": "FIELD",
+          "name": "double_quoted",
+          "content": {
+            "type": "SYMBOL",
+            "name": "double_quoted"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "interpolation"
+          "type": "FIELD",
+          "name": "interpolation",
+          "content": {
+            "type": "SYMBOL",
+            "name": "interpolation"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "placeholder"
+          "type": "FIELD",
+          "name": "placeholder",
+          "content": {
+            "type": "SYMBOL",
+            "name": "placeholder"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "escape_sequence"
+          "type": "FIELD",
+          "name": "escape_sequence",
+          "content": {
+            "type": "SYMBOL",
+            "name": "escape_sequence"
+          }
         }
       ]
     },
@@ -191,8 +223,12 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "FIELD",
+          "name": "variable",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
         },
         {
           "type": "STRING",
@@ -211,25 +247,25 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "number",
-              "content": {
+          "type": "FIELD",
+          "name": "argument",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
                 "type": "SYMBOL",
                 "name": "decimal"
+              },
+              {
+                "type": "STRING",
+                "value": "@"
+              },
+              {
+                "type": "STRING",
+                "value": "*"
               }
-            },
-            {
-              "type": "STRING",
-              "value": "@"
-            },
-            {
-              "type": "STRING",
-              "value": "*"
-            }
-          ]
+            ]
+          }
         }
       ]
     },
