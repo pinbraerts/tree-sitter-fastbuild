@@ -136,10 +136,11 @@ module.exports = grammar({
       ),
 
     environment_variable: ($) => $.identifier,
-    usage: ($) => seq(
-      field("scope", choice(".", "^")),
-      field("variable", choice($.identifier, $.string))
-    ),
+    usage: ($) =>
+      seq(
+        field("scope", choice(".", "^")),
+        field("variable", choice($.identifier, $.string)),
+      ),
 
     array: ($) => seq("{", repeat($.statement), "}"),
     struct: ($) => seq("[", repeat($.statement), "]"),

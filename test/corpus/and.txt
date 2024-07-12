@@ -5,8 +5,8 @@ And
 ---
 (source_file
  (logic
-  left:  (usage (identifier))
-  (and right: (usage (identifier)))
+  left:  (usage variable: (identifier))
+  (and right: (usage variable: (identifier)))
  )
 )
 
@@ -17,10 +17,10 @@ And Multiple
 ------------
 (source_file
  (logic
-  left: (usage (identifier))
-  (and right: (usage (identifier)))
-  (or  right: (usage (identifier)))
-  (and right: (usage (identifier)))
+  left: (usage variable: (identifier))
+  (and right: (usage variable: (identifier)))
+  (or  right: (usage variable: (identifier)))
+  (and right: (usage variable: (identifier)))
  )
 )
 
@@ -33,10 +33,10 @@ And Parenthesis
  (logic
   left: (parenthesis (compare
    left:  (decimal)
-   right: (usage (identifier))
+   right: (usage variable: (identifier))
   ))
   (and right: (parenthesis (compare
-   left:  (usage (identifier))
+   left:  (usage variable: (identifier))
    right: (decimal)
   )))
  )

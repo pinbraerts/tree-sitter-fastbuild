@@ -28,16 +28,16 @@ function FunctionB( .Arg .Arg2 )
  (function_definition
   name: (identifier)
   arguments: (arguments
-   (usage (identifier))
-   (usage (identifier))
+   (usage variable: (identifier))
+   (usage variable: (identifier))
   )
   body: (array
    (function_call
 	name: (identifier)
 	arguments: (arguments
 		(compare
-		 left:  (usage (identifier))
-		 right: (usage (identifier))
+		 left:  (usage variable: (identifier))
+		 right: (usage variable: (identifier))
 		)
     )
     body: (array

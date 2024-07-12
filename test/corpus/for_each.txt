@@ -11,13 +11,13 @@ ForEach( .IncPath in .IncPaths )
   name: (identifier)
   arguments: (arguments
    (in
-    left:  (usage (identifier))
-    right: (usage (identifier))
+    left:  (usage variable: (identifier))
+    right: (usage variable: (identifier))
    )
   )
   body: (array
    (compound
-    left: (usage (identifier))
+    left: (usage variable: (identifier))
     (concatenate right: (string
      single_quoted: (single_quoted)
      interpolation: (interpolation variable: (identifier))

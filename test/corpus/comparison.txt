@@ -5,8 +5,8 @@ compare Equal
 ----------------
 (source_file
  (compare
-  left:  (usage (identifier))
-  right: (usage (identifier))
+  left:  (usage variable: (identifier))
+  right: (usage variable: (identifier))
  )
 )
 
@@ -17,8 +17,8 @@ compare Not Equal
 --------------------
 (source_file
  (compare
-  left:  (usage (identifier))
-  right: (usage (identifier))
+  left:  (usage variable: (identifier))
+  right: (usage variable: (identifier))
  )
 )
 
@@ -29,8 +29,8 @@ compare Greater
 ------------------
 (source_file
  (compare
-  left:  (usage (identifier))
-  right: (usage (identifier))
+  left:  (usage variable: (identifier))
+  right: (usage variable: (identifier))
  )
 )
 
@@ -41,7 +41,7 @@ compare Less
 ---------------
 (source_file
  (compare
-  left:  (usage (identifier))
-  right: (usage (identifier))
+  left:  (usage variable: (identifier))
+  right: (usage variable: (identifier))
  )
 )

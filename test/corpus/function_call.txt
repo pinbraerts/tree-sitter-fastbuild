@@ -20,7 +20,7 @@ FunctionB   ( 'ALiteralString', .APreviouslyDeclaredString )
   name: (identifier)
   arguments: (arguments
    (string single_quoted: (single_quoted))
-   (usage (identifier))
+   (usage variable: (identifier))
   )
  )
 )
@@ -38,11 +38,11 @@ Library ( "mylib" .identifier )
   name: (identifier)
   arguments: (arguments
    (string double_quoted: (double_quoted))
-   (usage (identifier))
+   (usage variable: (identifier))
   )
   body: (array
    (compound
-	left: (usage (identifier))
+	left: (usage variable: (identifier))
 	(assign right: (string double_quoted: (double_quoted)))
    )
   )

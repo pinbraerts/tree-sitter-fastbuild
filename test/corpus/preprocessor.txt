@@ -92,7 +92,7 @@ Preprocessor in code
 --------------------
 (source_file
  (compound
-  left: (usage (identifier))
+  left: (usage variable: (identifier))
   (assign right: (decimal))
   (preprocessor_if condition: (identifier))
   (concatenate right: (decimal))
