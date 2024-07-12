@@ -73,28 +73,27 @@ module.exports = grammar({
       seq(
         "#",
         choice(
-          $.preprocessor_define,
-          $.preprocessor_undef,
-          $.preprocessor_if,
-          $.preprocessor_import,
-          $.preprocessor_include,
-          $.preprocessor_once,
-          $.preprocessor_else,
-          $.preprocessor_endif,
-          $.preprocessor_unknown,
+          $.define,
+          $.undef,
+          $.if,
+          $.import,
+          $.include,
+          $.once,
+          $.else,
+          $.endif,
+          $.unknown,
         ),
         $._preprocessor_end,
       ),
-    preprocessor_unknown: ($) => $.identifier,
-    preprocessor_define: ($) => seq("define", field("variable", $.identifier)),
-    preprocessor_undef: ($) => seq("undef", field("variable", $.identifier)),
-    preprocessor_import: ($) => seq("import", field("variable", $.identifier)),
-    preprocessor_include: ($) => seq("include", field("filename", $.string)),
-    preprocessor_if: ($) =>
-      seq("if", field("condition", $.preprocessor_expression)),
-    preprocessor_else: (_) => "else",
-    preprocessor_endif: (_) => "endif",
-    preprocessor_once: (_) => "once",
+    unknown: ($) => $.identifier,
+    define: ($) => seq("define", field("variable", $.identifier)),
+    undef: ($) => seq("undef", field("variable", $.identifier)),
+    import: ($) => seq("import", field("variable", $.identifier)),
+    include: ($) => seq("include", field("filename", $.string)),
+    if: ($) => seq("if", field("condition", $.preprocessor_expression)),
+    else: (_) => "else",
+    endif: (_) => "endif",
+    once: (_) => "once",
     preprocessor_expression: ($) =>
       choice(
         $.literal,
@@ -102,7 +101,7 @@ module.exports = grammar({
         alias($.preprocessor_not, $.not),
         alias($.preprocessor_and, $.and),
         alias($.preprocessor_or, $.or),
-        alias($.preprocessor_call, $.function_call),
+        alias($.preprocessor_call, $.call),
       ),
     preprocessor_call: ($) =>
       seq(
@@ -147,7 +146,7 @@ module.exports = grammar({
     arguments: ($) => seq("(", repeat($.statement), ")"),
     parenthesis: ($) => seq("(", $.statement, ")"),
 
-    function_call: ($) =>
+    call: ($) =>
       prec.right(
         precedence.function,
         seq(
@@ -181,7 +180,7 @@ module.exports = grammar({
         $.in,
         $.not_in,
         $.compare,
-        $.function_call,
+        $.call,
         $.function_definition,
       ),
 

@@ -7,7 +7,7 @@ ForEach( .IncPath in .IncPaths )
 }
 --------
 (source_file
- (function_call
+ (call
   name: (identifier)
   arguments: (arguments
    (in

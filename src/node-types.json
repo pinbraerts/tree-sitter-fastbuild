@@ -8,11 +8,11 @@
         "named": true
       },
       {
-        "type": "compare",
+        "type": "call",
         "named": true
       },
       {
-        "type": "function_call",
+        "type": "compare",
         "named": true
       },
       {
@@ -86,7 +86,7 @@
         "named": true
       },
       {
-        "type": "function_call",
+        "type": "call",
         "named": true
       },
       {
@@ -211,6 +211,46 @@
     "fields": {}
   },
   {
+    "type": "call",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "arguments",
+            "named": true
+          },
+          {
+            "type": "preprocessor_expression",
+            "named": true
+          }
+        ]
+      },
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "compare",
     "named": true,
     "fields": {
@@ -321,34 +361,10 @@
     }
   },
   {
-    "type": "function_call",
+    "type": "define",
     "named": true,
     "fields": {
-      "arguments": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "arguments",
-            "named": true
-          },
-          {
-            "type": "preprocessor_expression",
-            "named": true
-          }
-        ]
-      },
-      "body": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "array",
-            "named": true
-          }
-        ]
-      },
-      "name": {
+      "variable": {
         "multiple": false,
         "required": true,
         "types": [
@@ -397,6 +413,38 @@
     }
   },
   {
+    "type": "if",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "preprocessor_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "import",
+    "named": true,
+    "fields": {
+      "variable": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "in",
     "named": true,
     "fields": {
@@ -426,6 +474,22 @@
         "types": [
           {
             "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "include",
+    "named": true,
+    "fields": {
+      "filename": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string",
             "named": true
           }
         ]
@@ -604,101 +668,6 @@
     }
   },
   {
-    "type": "preprocessor_define",
-    "named": true,
-    "fields": {
-      "variable": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "preprocessor_if",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "preprocessor_expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "preprocessor_import",
-    "named": true,
-    "fields": {
-      "variable": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "preprocessor_include",
-    "named": true,
-    "fields": {
-      "filename": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "preprocessor_undef",
-    "named": true,
-    "fields": {
-      "variable": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "preprocessor_unknown",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -802,6 +771,37 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "undef",
+    "named": true,
+    "fields": {
+      "variable": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "unknown",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -951,6 +951,14 @@
     "named": true
   },
   {
+    "type": "else",
+    "named": true
+  },
+  {
+    "type": "endif",
+    "named": true
+  },
+  {
     "type": "escape_sequence",
     "named": true
   },
@@ -987,15 +995,7 @@
     "named": false
   },
   {
-    "type": "preprocessor_else",
-    "named": true
-  },
-  {
-    "type": "preprocessor_endif",
-    "named": true
-  },
-  {
-    "type": "preprocessor_once",
+    "type": "once",
     "named": true
   },
   {

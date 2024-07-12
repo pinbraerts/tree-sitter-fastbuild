@@ -281,39 +281,39 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "preprocessor_define"
+              "name": "define"
             },
             {
               "type": "SYMBOL",
-              "name": "preprocessor_undef"
+              "name": "undef"
             },
             {
               "type": "SYMBOL",
-              "name": "preprocessor_if"
+              "name": "if"
             },
             {
               "type": "SYMBOL",
-              "name": "preprocessor_import"
+              "name": "import"
             },
             {
               "type": "SYMBOL",
-              "name": "preprocessor_include"
+              "name": "include"
             },
             {
               "type": "SYMBOL",
-              "name": "preprocessor_once"
+              "name": "once"
             },
             {
               "type": "SYMBOL",
-              "name": "preprocessor_else"
+              "name": "else"
             },
             {
               "type": "SYMBOL",
-              "name": "preprocessor_endif"
+              "name": "endif"
             },
             {
               "type": "SYMBOL",
-              "name": "preprocessor_unknown"
+              "name": "unknown"
             }
           ]
         },
@@ -323,11 +323,11 @@
         }
       ]
     },
-    "preprocessor_unknown": {
+    "unknown": {
       "type": "SYMBOL",
       "name": "identifier"
     },
-    "preprocessor_define": {
+    "define": {
       "type": "SEQ",
       "members": [
         {
@@ -344,7 +344,7 @@
         }
       ]
     },
-    "preprocessor_undef": {
+    "undef": {
       "type": "SEQ",
       "members": [
         {
@@ -361,7 +361,7 @@
         }
       ]
     },
-    "preprocessor_import": {
+    "import": {
       "type": "SEQ",
       "members": [
         {
@@ -378,7 +378,7 @@
         }
       ]
     },
-    "preprocessor_include": {
+    "include": {
       "type": "SEQ",
       "members": [
         {
@@ -395,7 +395,7 @@
         }
       ]
     },
-    "preprocessor_if": {
+    "if": {
       "type": "SEQ",
       "members": [
         {
@@ -412,15 +412,15 @@
         }
       ]
     },
-    "preprocessor_else": {
+    "else": {
       "type": "STRING",
       "value": "else"
     },
-    "preprocessor_endif": {
+    "endif": {
       "type": "STRING",
       "value": "endif"
     },
-    "preprocessor_once": {
+    "once": {
       "type": "STRING",
       "value": "once"
     },
@@ -469,7 +469,7 @@
             "name": "preprocessor_call"
           },
           "named": true,
-          "value": "function_call"
+          "value": "call"
         }
       ]
     },
@@ -704,7 +704,7 @@
         }
       ]
     },
-    "function_call": {
+    "call": {
       "type": "PREC_RIGHT",
       "value": 8,
       "content": {
@@ -864,7 +864,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "function_call"
+          "name": "call"
         },
         {
           "type": "SYMBOL",

@@ -4,7 +4,7 @@ Preprocessor Undef
 #undef USE_CLANG_COMPILER
 ------------------
 (source_file
- (preprocessor_undef (identifier))
+ (undef (identifier))
 )
 
 ===================
@@ -13,7 +13,7 @@ Preprocessor Import
    # 	import VS120COMNTOOLS
 -------------------
 (source_file
- (preprocessor_import (identifier))
+ (import (identifier))
 )
 
 ====================
@@ -22,7 +22,7 @@ Preprocessor Include
   #    include "/some/file/full/path.txt"
 --------------------
 (source_file
- (preprocessor_include (string (double_quoted)))
+ (include (string (double_quoted)))
 )
 
 ===================
@@ -32,8 +32,8 @@ Preprocessor Define
 		  # 		define A
 -------------------
 (source_file
- (preprocessor_define (identifier))
- (preprocessor_define (identifier))
+ (define (identifier))
+ (define (identifier))
 )
 
 ======================
@@ -43,14 +43,14 @@ Preprocessor Condition
 #endif
 ----------------------
 (source_file
- (preprocessor_if
+ (if
   condition: (or
    left: (and
-    left: (function_call
+    left: (call
       name: (identifier)
       arguments: (identifier)
     )
-    right: (function_call name: (identifier) arguments: (string double_quoted: (double_quoted)))
+    right: (call name: (identifier) arguments: (string double_quoted: (double_quoted)))
    )
    right: (and
 	left: (not right: (identifier))
@@ -58,7 +58,7 @@ Preprocessor Condition
    )
   )
  )
- (preprocessor_endif)
+ (endif)
 )
 
 =================
@@ -72,12 +72,12 @@ Preprocessor Else
 #endif
 -----------------
 (source_file
- (preprocessor_if condition: (identifier))
- (preprocessor_else)
- (preprocessor_if condition: (identifier))
- (preprocessor_else)
- (preprocessor_endif)
- (preprocessor_endif)
+ (if condition: (identifier))
+ (else)
+ (if condition: (identifier))
+ (else)
+ (endif)
+ (endif)
 )
 
 ====================
@@ -94,12 +94,12 @@ Preprocessor in code
  (compound
   left: (usage variable: (identifier))
   (assign right: (decimal))
-  (preprocessor_if condition: (identifier))
+  (if condition: (identifier))
   (concatenate right: (decimal))
-  (preprocessor_else)
+  (else)
   (subtract right: (decimal))
  )
- (preprocessor_endif)
+ (endif)
 )
 
 ===
@@ -111,5 +111,5 @@ preprocessor unknown
 // comment
 ---
 (source_file
- (preprocessor_unknown (identifier))
+ (unknown (identifier))
  (comment))

@@ -4,7 +4,7 @@ Primitive Call
 FunctionA()
 --------------
 (source_file
- (function_call
+ (call
   name: (identifier)
   arguments: (arguments)
  )
@@ -16,7 +16,7 @@ Simple Call
 FunctionB   ( 'ALiteralString', .APreviouslyDeclaredString )
 -----------
 (source_file
- (function_call
+ (call
   name: (identifier)
   arguments: (arguments
    (string single_quoted: (single_quoted))
@@ -34,7 +34,7 @@ Library ( "mylib" .identifier )
 }
 -------------
 (source_file
- (function_call
+ (call
   name: (identifier)
   arguments: (arguments
    (string double_quoted: (double_quoted))
