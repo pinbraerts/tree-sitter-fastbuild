@@ -105,11 +105,16 @@ Preprocessor in code
 ===
 preprocessor unknown
 ===
-
 #some
-
-// comment
 ---
 (source_file
- (unknown (identifier))
- (comment))
+ (unknown (identifier)))
+
+===
+preprocessor undef
+===
+
+#undef A
+---
+(source_file
+ (undef variable: (identifier)))

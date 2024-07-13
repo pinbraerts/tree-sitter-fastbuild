@@ -7,6 +7,10 @@ let precedence = {
   function: 8,
 };
 
+function preprocessor($, name, ...args) {
+  return seq(alias(seq("#", name), "#" + name), ...args, $._preprocessor_end);
+}
+
 module.exports = grammar({
   name: "fastbuild",
 
@@ -15,7 +19,15 @@ module.exports = grammar({
     $._whitespace,
     $._separator,
     $._newline,
-    $._preprocessor,
+    $.define,
+    $.undef,
+    $.if,
+    $.import,
+    $.include,
+    $.once,
+    $.else,
+    $.endif,
+    $.unknown,
   ],
 
   word: ($) => $.identifier,
@@ -69,31 +81,16 @@ module.exports = grammar({
     placeholder: ($) =>
       seq(token.immediate("%"), field("argument", choice($.decimal, "@", "*"))),
 
-    _preprocessor: ($) =>
-      seq(
-        "#",
-        choice(
-          $.define,
-          $.undef,
-          $.if,
-          $.import,
-          $.include,
-          $.once,
-          $.else,
-          $.endif,
-          $.unknown,
-        ),
-        $._preprocessor_end,
-      ),
-    unknown: ($) => $.identifier,
-    define: ($) => seq("define", field("variable", $.identifier)),
-    undef: ($) => seq("undef", field("variable", $.identifier)),
-    import: ($) => seq("import", field("variable", $.identifier)),
-    include: ($) => seq("include", field("filename", $.string)),
-    if: ($) => seq("if", field("condition", $.preprocessor_expression)),
-    else: (_) => "else",
-    endif: (_) => "endif",
-    once: (_) => "once",
+    unknown: ($) => seq("#", $.identifier, $._preprocessor_end),
+    define: ($) => preprocessor($, "define", field("variable", $.identifier)),
+    undef: ($) => preprocessor($, "undef", field("variable", $.identifier)),
+    import: ($) => preprocessor($, "import", field("variable", $.identifier)),
+    include: ($) => preprocessor($, "include", field("filename", $.string)),
+    if: ($) =>
+      preprocessor($, "if", field("condition", $.preprocessor_expression)),
+    else: ($) => preprocessor($, "else"),
+    endif: ($) => preprocessor($, "endif"),
+    once: ($) => preprocessor($, "once"),
     preprocessor_expression: ($) =>
       choice(
         $.literal,

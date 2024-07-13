@@ -377,6 +377,16 @@
     }
   },
   {
+    "type": "else",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "endif",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "function_definition",
     "named": true,
     "fields": {
@@ -597,6 +607,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "once",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "or",
@@ -855,6 +870,38 @@
     "named": false
   },
   {
+    "type": "#define",
+    "named": false
+  },
+  {
+    "type": "#else",
+    "named": false
+  },
+  {
+    "type": "#endif",
+    "named": false
+  },
+  {
+    "type": "#if",
+    "named": false
+  },
+  {
+    "type": "#import",
+    "named": false
+  },
+  {
+    "type": "#include",
+    "named": false
+  },
+  {
+    "type": "#once",
+    "named": false
+  },
+  {
+    "type": "#undef",
+    "named": false
+  },
+  {
     "type": "$",
     "named": false
   },
@@ -943,19 +990,7 @@
     "named": true
   },
   {
-    "type": "define",
-    "named": false
-  },
-  {
     "type": "double_quoted",
-    "named": true
-  },
-  {
-    "type": "else",
-    "named": true
-  },
-  {
-    "type": "endif",
     "named": true
   },
   {
@@ -975,19 +1010,7 @@
     "named": true
   },
   {
-    "type": "if",
-    "named": false
-  },
-  {
-    "type": "import",
-    "named": false
-  },
-  {
     "type": "in",
-    "named": false
-  },
-  {
-    "type": "include",
     "named": false
   },
   {
@@ -995,19 +1018,11 @@
     "named": false
   },
   {
-    "type": "once",
-    "named": true
-  },
-  {
     "type": "single_quoted",
     "named": true
   },
   {
     "type": "true",
-    "named": false
-  },
-  {
-    "type": "undef",
     "named": false
   },
   {
