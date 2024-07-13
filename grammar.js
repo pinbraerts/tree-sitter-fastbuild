@@ -134,7 +134,6 @@ module.exports = grammar({
         seq("!", field("right", $.preprocessor_expression)),
       ),
 
-    environment_variable: ($) => $.identifier,
     usage: ($) =>
       seq(
         field("scope", choice(".", "^")),

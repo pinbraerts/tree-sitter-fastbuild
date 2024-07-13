@@ -584,10 +584,6 @@
         ]
       }
     },
-    "environment_variable": {
-      "type": "SYMBOL",
-      "name": "identifier"
-    },
     "usage": {
       "type": "SEQ",
       "members": [
