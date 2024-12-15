@@ -1,4 +1,4 @@
-name: CI
+name: Tree Sitter
 
 on:
   push:
