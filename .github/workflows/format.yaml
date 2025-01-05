@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        rev: [v0.10.0]
+        rev: [v0.10.1]
     steps:
       - uses: actions/checkout@v4
       - uses: rhysd/action-setup-vim@v1
