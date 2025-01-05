@@ -84,11 +84,8 @@
 (number) @number.inner
 
 (
-  (
-    ","? @_start
-    .
-    (statement) @parameter.inner
-  )
-  (#make-range! "parameter.outer" @_start @parameter.inner)
+  (statement) @parameter.inner
+  .
+  ","? @_end
+  (#make-range! "parameter.outer" @parameter.inner @_end)
 )
-
