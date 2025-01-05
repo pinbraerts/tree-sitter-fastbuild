@@ -11,13 +11,16 @@ function preprocessor($, name, ...args) {
   return seq(alias(seq("#", name), "#" + name), ...args, $._preprocessor_end);
 }
 
+function repeat_inside(braces, rule) {
+  return seq(braces[0], repeat(seq(rule, optional(","))), braces[1])
+}
+
 module.exports = grammar({
   name: "fastbuild",
 
   extras: ($) => [
     $.comment,
     $._whitespace,
-    $._separator,
     $._newline,
     $.define,
     $.undef,
@@ -45,8 +48,7 @@ module.exports = grammar({
   externals: ($) => [$._preprocessor_end],
 
   rules: {
-    source_file: ($) => repeat($.statement),
-    _separator: (_) => ",",
+    source_file: ($) => repeat(seq($.statement, optional(","))),
     _whitespace: (_) => token(/[\s\u00A0\uFEFF\u3000]+/),
     // http://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
     comment: (_) => token(choice(/;.*/, /\/\/.*/)),
@@ -137,9 +139,9 @@ module.exports = grammar({
         field("variable", choice($.identifier, $.string)),
       ),
 
-    array: ($) => seq("{", repeat($.statement), "}"),
-    struct: ($) => seq("[", repeat($.statement), "]"),
-    arguments: ($) => seq("(", repeat($.statement), ")"),
+    array: ($) => repeat_inside("{}", $.statement),
+    struct: ($) => repeat_inside("[]", $.statement),
+    arguments: ($) => repeat_inside("()", $.statement),
     parenthesis: ($) => seq("(", $.statement, ")"),
 
     call: ($) =>

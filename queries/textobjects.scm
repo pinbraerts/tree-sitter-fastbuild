@@ -83,4 +83,12 @@
 
 (number) @number.inner
 
-(usage) @parameter.inner @parameter.outer
+(
+  (
+    ","? @_start
+    .
+    (statement) @parameter.inner
+  )
+  (#make-range! "parameter.outer" @_start @parameter.inner)
+)
+
