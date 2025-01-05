@@ -37,4 +37,4 @@ jobs:
       - name: Check for changes
         run: |
           git diff
-          test -s "$(git diff)"
+          test -z "$(git diff)"
