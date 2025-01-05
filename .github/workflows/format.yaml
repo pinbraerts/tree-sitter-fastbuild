@@ -35,4 +35,6 @@ jobs:
       - name: Format queries
         run: ../nvim-treesitter/scripts/format-queries.lua
       - name: Check for changes
-        run: test -s "$(git diff)"
+        run: |
+          git diff
+          test -s "$(git diff)"
