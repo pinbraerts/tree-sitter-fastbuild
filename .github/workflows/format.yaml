@@ -1,0 +1,40 @@
+name: Format and check queries
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - .github/workflows/**
+      - queries
+  pull_request:
+    paths:
+      - .github/workflows/**
+      - queries
+
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    name: Format and check
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        rev: [v0.10.1]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: ${{ matrix.rev }}
+      - name: Checkout nvim-treesitter
+        run: |
+          git clone --depth 1 https://github.com/nvim-treesitter/nvim-treesitter ../nvim-treesitter
+      - name: Format queries
+        run: ../nvim-treesitter/scripts/format-queries.lua
+      - name: Check for changes
+        run: |
+          git diff
+          test -z "$(git diff)"
