@@ -30,13 +30,9 @@ jobs:
           neovim: true
           version: ${{ matrix.rev }}
       - name: Checkout nvim-treesitter
-        uses: actions/checkout@v4
-        with:
-          repository: 'nvim-treesitter/nvim-treesitter'
-          path: '../nvim-treesitter'
-
+        run: |
+          git clone --depth 1 https://github.com/nvim-treesitter/nvim-treesitter ../nvim-treesitter
       - name: Format queries
         run: ../nvim-treesitter/scripts/format-queries.lua
-
       - name: Check for changes
         run: test -s "$(git diff)"
