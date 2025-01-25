@@ -6,7 +6,21 @@
 
 It's not published on grammar lists yet
 
-### [NeoVim](https://github.com/neovim/neovim/) (using [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter))
+### [NeoVim](https://github.com/neovim/neovim/) using [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)) via [Lazy.nvim](https://github.com/folke/lazy.nvim)
+
+```lua
+{
+  "pinbraerts/tree-sitter-fastbuild",
+  build = ":TSInstall fastbuild",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter",
+  },
+},
+```
+
+<details>
+
+<summary>Without plugin system</summary>
 
 ```lua
 local parsers = require 'nvim-treesitter.parsers'.get_parser_configs()
@@ -36,8 +50,6 @@ And then
 :TSInstall fastbuild
 ```
 
-### Queries
-
 You need to copy queries to some nvim runtime path directory
 
 #### shell
@@ -51,6 +63,8 @@ ln -s /path/to/cloned/tree-sitter-fastbuild/queries ~/.config/nvim/after/queries
 ```powershell
 New-Item -Type SymbolicLink -Value path\to\cloned\tree-sitter-fastbuild\queries -Path $env:LOCALAPPDATA\nvim\after\queries\fastbuild
 ```
+
+</details>
 
 ## Features
 
