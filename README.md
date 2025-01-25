@@ -6,7 +6,7 @@
 
 It's not published on grammar lists yet
 
-### [NeoVim](https://github.com/neovim/neovim/) using [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)) via [Lazy.nvim](https://github.com/folke/lazy.nvim)
+### [NeoVim](https://github.com/neovim/neovim/) using [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) via [Lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```lua
 {
